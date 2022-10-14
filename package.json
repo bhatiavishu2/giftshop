@@ -1,6 +1,7 @@
 {
   "name": "react-shopping-cart",
   "version": "0.1.0",
+  "homepage": "https://bbeventgift.shop/",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.6.9",

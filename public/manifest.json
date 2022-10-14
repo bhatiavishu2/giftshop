@@ -1,5 +1,5 @@
 {
-  "short_name": "Veggy",
+  "short_name": "MB Group",
   "name": "React Shopping Cart",
   "icons": [
     {
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#077915",
+  "theme_color": "#000",
   "background_color": "#ffffff"
 }

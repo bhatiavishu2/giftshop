@@ -1,17 +1,20 @@
 import React, { useEffect, useContext } from "react";
 import ProductCard from "components/Product";
+import {  useQuery } from '@apollo/client';
 import {
   ProductsStateContext,
   ProductsDispatchContext,
-  getProducts
+
 } from "contexts/products";
+import {
+  getProducts
+} from "graphql/products";
 import { CommonStateContext } from "contexts/common";
 
 const Home = () => {
-  const { products, isLoading, isLoaded } = useContext(ProductsStateContext);
   const { searchKeyword } = useContext(CommonStateContext);
   const dispatch = useContext(ProductsDispatchContext);
-
+  const { loading:isLoading, error, products } = useQuery(getProducts);
   const productsList =
     products &&
     products.filter((product) => {
@@ -21,9 +24,9 @@ const Home = () => {
       );
     });
 
-  useEffect(() => {
-    getProducts(dispatch);
-  }, []);
+  // useEffect(() => {
+  //   getProducts(dispatch);
+  // }, []);
 
   if (isLoading) {
     return (
@@ -35,7 +38,7 @@ const Home = () => {
   return (
     <div className="products-wrapper">
       <div className="products">
-        {isLoaded &&
+        {products &&
           productsList.map((data) => {
             return <ProductCard key={data.id} data={data} />;
           })}

@@ -55,7 +55,7 @@ const LoginStep = () => {
         {isLoggedIn ? (
           <>
             <p>
-              Logged in as <span>{user.username}</span>
+              Logged in as <span>{user?.context?.userDetails?.name}</span>
             </p>
             <button onClick={() => handleLoginAsDiffUser()}>
               Login as Different User

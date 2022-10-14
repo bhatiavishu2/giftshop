@@ -3,48 +3,36 @@ import { Formik, Form, Field } from "formik";
 import { useHistory, useLocation } from "react-router-dom";
 import * as Yup from "yup";
 import _get from "lodash.get";
-import { AuthDispatchContext, signIn } from "contexts/auth";
 import Input from "components/core/form-controls/Input";
-import {login, context} from 'graphql/auth';
-import {  useMutation, useLazyQuery } from '@apollo/client';
+import {createUser} from 'graphql/auth';
+import {  useMutation } from '@apollo/client';
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string().required("Password is required!"),
-  phone: Yup.string().required("Mobile Number is required!")
+  phone: Yup.string().required("Mobile Number is required!"),
+  name: Yup.string().required("Name is required!")
 });
 
-const AuthPage = () => {
-  const authDispatch = useContext(AuthDispatchContext);
+const Register = () => {
   const history = useHistory();
   const location = useLocation();
-  const [submitLogin] = useMutation(login);
-  const [
-    getContext, 
-    { loading, data }
-  ] = useLazyQuery(context);
+  const [submitRegister] = useMutation(createUser);
+
   const fromUrl = _get(location, "state.from.pathname");
   console.log("location => ", location);
-  const goToForgotPassword = (e) => {
+
+  const goToLogin = (e) => {
     e.preventDefault();
+    history.push("/auth");
   };
 
-  const goToRegister = (e) => {
-    e.preventDefault();
-    history.push("/register");
-  };
 
-  useEffect(()=>{
-    if(data){
-      signInSuccess(data);
-    }
-  },[data]);
 
-  const signInSuccess = (userData) => {
-    signIn(authDispatch, userData);
+  const registerSuccess = () => {
     if (fromUrl) {
       history.push(fromUrl);
     } else {
-      history.push("/");
+      history.push("/auth");
     }
   };
 
@@ -52,18 +40,18 @@ const AuthPage = () => {
     <Formik
       initialValues={{
         phone: "",
-        password: ""
+        password: "",
+        name:''
       }}
       validationSchema={LoginSchema}
       onSubmit={async (values, { resetForm }) => {
         try {
-          const userData = await submitLogin({ variables:
+          const userData = await submitRegister({ variables:
             values
           });
-          getContext({ variables:
-            {token:userData?.data?.login?.token}
-          });
-         
+          if(userData){
+            registerSuccess()
+          }
         } catch (err) {
           console.error(err);
         }
@@ -77,6 +65,12 @@ const AuthPage = () => {
             placeholder="Mobile Number"
             component={Input}
           />
+             <Field
+            name="name"
+            type="name"
+            placeholder="Name"
+            component={Input}
+          />
           <Field
             name="password"
             type="password"
@@ -84,19 +78,14 @@ const AuthPage = () => {
             component={Input}
           />
 
-          <p>
-            <a href="/#" onClick={goToForgotPassword}>
-              Forgot Password?
-            </a>
-          </p>
           <button className="auth-button block" onClick={() => {}}>
-            Login
+            Register
           </button>
 
           <p>
-            New here?{" "}
-            <a href="/#" onClick={goToRegister}>
-              Sign Up Now!
+            Already Registered?{" "}
+            <a href="/#" onClick={goToLogin}>
+              Login Now!
             </a>
           </p>
         </Form>
@@ -105,4 +94,4 @@ const AuthPage = () => {
   );
 };
 
-export default AuthPage;
+export default Register;

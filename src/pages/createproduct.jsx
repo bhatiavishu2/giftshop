@@ -8,12 +8,14 @@ import Input from "components/core/form-controls/Input";
 import {login, context} from 'graphql/auth';
 import {  useMutation, useLazyQuery } from '@apollo/client';
 
-const LoginSchema = Yup.object().shape({
-  password: Yup.string().required("Password is required!"),
-  phone: Yup.string().required("Mobile Number is required!")
+const ProductSchema = Yup.object().shape({
+    name: Yup.string().required("Name is required!"),
+    price: Yup.string().required("Price is required!"),
+    images: Yup.string().required("images are required"),
+    category: Yup.string().required("Category is required!"),
 });
 
-const AuthPage = () => {
+const CreateProduct = () => {
   const authDispatch = useContext(AuthDispatchContext);
   const history = useHistory();
   const location = useLocation();
@@ -51,10 +53,12 @@ const AuthPage = () => {
   return (
     <Formik
       initialValues={{
-        phone: "",
-        password: ""
+        name: "",
+        price: "",
+        images:"",
+        category:""
       }}
-      validationSchema={LoginSchema}
+      validationSchema={ProductSchema}
       onSubmit={async (values, { resetForm }) => {
         try {
           const userData = await submitLogin({ variables:
@@ -72,37 +76,42 @@ const AuthPage = () => {
       {() => (
         <Form>
           <Field
-            name="phone"
+            name="name"
             type="text"
-            placeholder="Mobile Number"
+            placeholder="Product Name"
             component={Input}
           />
           <Field
-            name="password"
-            type="password"
-            placeholder="Password"
+            name="price"
+            type="text"
+            placeholder="Price"
+            component={Input}
+          />
+           <Field
+            name="images"
+            type="file"
+            placeholder="Images"
+            component={Input}
+            multiple
+            accept="image/png, image/gif, image/jpeg"
+          />
+           <Field
+            name="category"
+            type="text"
+            placeholder="Category"
             component={Input}
           />
 
-          <p>
-            <a href="/#" onClick={goToForgotPassword}>
-              Forgot Password?
-            </a>
-          </p>
+  
           <button className="auth-button block" onClick={() => {}}>
-            Login
+            Create Product
           </button>
 
-          <p>
-            New here?{" "}
-            <a href="/#" onClick={goToRegister}>
-              Sign Up Now!
-            </a>
-          </p>
+        
         </Form>
       )}
     </Formik>
   );
 };
 
-export default AuthPage;
+export default CreateProduct;

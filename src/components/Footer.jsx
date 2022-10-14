@@ -7,25 +7,18 @@ const Footer = () => {
       <p className="footer-links">
         <a
           href="https://github.com/sivadass/react-shopping-cart"
-          target="_blank"
+          target="_blank" rel="noreferrer"
         >
           View Source on Github
         </a>
         <span> / </span>
-        <a href="mailto:contact@sivadass.in" target="_blank">
+        <a href="mailto:contact@sivadass.in" target="_blank" rel="noreferrer">
           Need any help?
         </a>
-        <span> / </span>
-        <a href="https://twitter.com/NSivadass" target="_blank">
-          Say Hi on Twitter
-        </a>
-        <span> / </span>
-        <a href="https://sivadass.in" target="_blank">
-          Read My Blog
-        </a>
+        
       </p>
       <p>
-        &copy; {currentYear} <strong>Veggy</strong> - Organic Green Store
+        &copy; {currentYear} <strong>MB Group</strong> - Personalized Gift Store
       </p>
     </footer>
   );

@@ -21,7 +21,7 @@
       }
     }
   }
-  .product-name {
+  .product-name, .product-description {
     font-weight: normal;
     font-size: 16px;
     line-height: 20px;
@@ -37,6 +37,7 @@
     }
   }
   .product-name,
+  .product-description,
   .product-price {
     color: $gray-medium;
     padding: 0 16px;

@@ -23,4 +23,9 @@
   border-radius: 8px;
   height: 48px;
   margin: 24px 0;
+ 
+}
+
+.auth-button:disabled{
+  background: lightgrey;
 }

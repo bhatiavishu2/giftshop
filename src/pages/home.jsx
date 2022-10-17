@@ -1,5 +1,6 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import ProductCard from "components/Product";
+import QuickView from "components/QuickView"
 import {  useQuery } from '@apollo/client';
 import {
   ProductsStateContext,
@@ -14,7 +15,10 @@ import { CommonStateContext } from "contexts/common";
 const Home = () => {
   const { searchKeyword } = useContext(CommonStateContext);
   const dispatch = useContext(ProductsDispatchContext);
-  const { loading:isLoading, error, products } = useQuery(getProducts);
+  const { loading:isLoading, error, data = {} } = useQuery(getProducts);
+  const [previewData, setPreviewData] = useState({})
+  const [modalActive, setModalActive] = useState(false)
+  const { products} = data ;
   const productsList =
     products &&
     products.filter((product) => {
@@ -23,10 +27,19 @@ const Home = () => {
         !searchKeyword
       );
     });
+    console.log(products)
 
   // useEffect(() => {
   //   getProducts(dispatch);
   // }, []);
+
+  const onPreview = (data) =>{
+    setPreviewData(data)
+    setModalActive(true)
+  }
+  const closeModal = () => {
+    setModalActive(false);
+  }
 
   if (isLoading) {
     return (
@@ -40,8 +53,13 @@ const Home = () => {
       <div className="products">
         {products &&
           productsList.map((data) => {
-            return <ProductCard key={data.id} data={data} />;
+            return <ProductCard onPreview={onPreview} key={data.id} data={data} />;
           })}
+            <QuickView
+          product={previewData}
+          openModal={modalActive}
+          closeModal={closeModal}
+        />
       </div>
     </div>
   );

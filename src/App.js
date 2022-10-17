@@ -13,11 +13,14 @@ import HomePage from "pages/home";
 import RegisterPage from "pages/register";
 import CheckoutPage from "pages/checkout";
 import ProductPage from "pages/createproduct";
+import CategoryPage from "pages/createCategory";
+import SubCategoryPage from "pages/createSubCategory";
+import { endpoint } from "./constants";
 import "assets/scss/style.scss";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: "http://localhost:3000/graphql"
+  uri: endpoint
 });
 
 const App = () => {
@@ -54,6 +57,16 @@ const App = () => {
                     <RouteWrapper
                       path="/createProduct"
                       component={ProductPage}
+                      layout={AuthLayout}
+                    />
+                    <RouteWrapper
+                      path="/createCategory"
+                      component={CategoryPage}
+                      layout={AuthLayout}
+                    />
+                    <RouteWrapper
+                      path="/createSubCategory"
+                      component={SubCategoryPage}
                       layout={AuthLayout}
                     />
                   </Switch>

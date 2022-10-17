@@ -278,7 +278,7 @@ header {
   .product-info {
     margin-left: 16px;
     flex-grow: 1;
-    .product-name {
+    .product-name, .product-description {
       color: $gray-light;
       font-size: 14px;
     }

@@ -1,79 +1,52 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { Formik, Form, Field } from "formik";
-import { useHistory, useLocation } from "react-router-dom";
 import * as Yup from "yup";
 import _get from "lodash.get";
-import { AuthDispatchContext, signIn } from "contexts/auth";
 import Input from "components/core/form-controls/Input";
-import {login, context} from 'graphql/auth';
-import {  useMutation, useLazyQuery } from '@apollo/client';
-
+import Select from "components/core/form-controls/Select";
+import { getCategories} from 'graphql/category';
+import {  useMutation, useQuery } from '@apollo/client';
+import {uploadImages} from 'graphql/upload'
+import {createProduct} from 'graphql/products'
 const ProductSchema = Yup.object().shape({
     name: Yup.string().required("Name is required!"),
     price: Yup.string().required("Price is required!"),
-    images: Yup.string().required("images are required"),
-    category: Yup.string().required("Category is required!"),
+    wholeSalePrice:Yup.string().required("Price is required!"),
+    subCategory: Yup.string().required("Sub Category is required!"),
+    productDescription: Yup.string().required("Product Description is required!"),
 });
 
 const CreateProduct = () => {
-  const authDispatch = useContext(AuthDispatchContext);
-  const history = useHistory();
-  const location = useLocation();
-  const [submitLogin] = useMutation(login);
-  const [
-    getContext, 
-    { loading, data }
-  ] = useLazyQuery(context);
-  const fromUrl = _get(location, "state.from.pathname");
-  console.log("location => ", location);
-  const goToForgotPassword = (e) => {
-    e.preventDefault();
-  };
-
-  const goToRegister = (e) => {
-    e.preventDefault();
-    history.push("/register");
-  };
-
-  useEffect(()=>{
-    if(data){
-      signInSuccess(data);
-    }
-  },[data]);
-
-  const signInSuccess = (userData) => {
-    signIn(authDispatch, userData);
-    if (fromUrl) {
-      history.push(fromUrl);
-    } else {
-      history.push("/");
-    }
-  };
+  const { loading:isLoading, error, data = {} } = useQuery(getCategories);
+  const [submitLogin] = useMutation(createProduct);
+  const{categories = []} = data
 
   return (
     <Formik
       initialValues={{
         name: "",
         price: "",
-        images:"",
-        category:""
+        wholeSalePrice:"",
+        category: [],
+        subCategory:"",
+        images:[],
+        productDescription:"",
+        file:[]
       }}
       validationSchema={ProductSchema}
       onSubmit={async (values, { resetForm }) => {
         try {
-          const userData = await submitLogin({ variables:
+         await submitLogin({ variables:
             values
           });
-          getContext({ variables:
-            {token:userData?.data?.login?.token}
-          });
+          resetForm();
          
         } catch (err) {
           console.error(err);
         }
       }}
     >
-      {() => (
+      {({values,setFieldValue}) => (
         <Form>
           <Field
             name="name"
@@ -87,23 +60,55 @@ const CreateProduct = () => {
             placeholder="Price"
             component={Input}
           />
+            <Field
+            name="wholeSalePrice"
+            type="text"
+            placeholder="Whole Sale Price"
+            component={Input}
+          />
+          <Field
+            name="productDescription"
+            type="text"
+            placeholder="Product Description"
+            component={Input}
+          />
+            <Field
+            name="category"
+            type="text"
+            placeholder="Category"
+            component={Select}
+            options={categories.map(c => ({name:c.name, value: c.subCategories, label:c.name}))}
+          />
            <Field
-            name="images"
+            name="subCategory"
+            type="text"
+            placeholder="Sub Category"
+            component={Select}
+            options={(values.category|| []).map(c => ({name:c.name, value: c.id, label:c.name}))}
+          />
+           <Field
+            name="file"
             type="file"
+            value={undefined}
             placeholder="Images"
             component={Input}
             multiple
             accept="image/png, image/gif, image/jpeg"
+            onChange={(event) => {
+              setFieldValue("file", event.currentTarget.files);
+            }}
           />
-           <Field
-            name="category"
-            type="text"
-            placeholder="Category"
-            component={Input}
-          />
-
-  
-          <button className="auth-button block" onClick={() => {}}>
+           
+           <button disabled={values.file.length === 0 || values.images.length !== 0} className="auth-button block" onClick={async (e) => {
+              e.preventDefault()
+              e.stopPropagation();
+             const result =  await uploadImages(values.file);
+            const {data:{files = [ ]}} = await result.json()
+             setFieldValue("images", files);
+            }}>
+            Upload Image
+          </button>
+          <button className="auth-button block" disabled={values.images.length === 0} onClick={() => {}}>
             Create Product
           </button>
 

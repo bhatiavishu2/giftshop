@@ -76,7 +76,7 @@ const Header = (props) => {
           </form>
         </div>
 
-        <div className="cart">
+     {false &&   <div className="cart">
           <div className="cart-info">
             <table>
               <tbody>
@@ -110,7 +110,7 @@ const Header = (props) => {
             )}
           </a>
           <CartPreview />
-        </div>
+        </div>}
       </div>
     </header>
   );

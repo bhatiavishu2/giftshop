@@ -1,10 +1,11 @@
 import React, { useState, useContext } from "react";
 import { CartDispatchContext, addToCart } from "contexts/cart";
+import { imagesUrl } from "../constants";
 
-const ProductCard = ({ data }) => {
+const ProductCard = ({ data, onPreview }) => {
   const [isAdded, setIsAdded] = useState(false);
   const dispatch = useContext(CartDispatchContext);
-  const { image, name, price, id, stock } = data;
+  const { images, name, price, id, stock, productDescription } = data;
 
   const handleAddToCart = () => {
     const product = { ...data, quantity: 1 };
@@ -18,11 +19,12 @@ const ProductCard = ({ data }) => {
   return (
     <div className="product">
       <div className="product-image">
-        <img src={image} alt={name} />
+        <img src={`${imagesUrl}/${images[0]}`} alt={name} onClick={()=>onPreview(data)} />
       </div>
       <h4 className="product-name">{name}</h4>
+      <p className="product-description">{productDescription}</p>
       <p className="product-price">{price}</p>
-      <div className="product-action">
+     {false && <div className="product-action">
         <button
           className={!isAdded ? "" : "added"}
           type="button"
@@ -30,7 +32,7 @@ const ProductCard = ({ data }) => {
         >
           {!isAdded ? "ADD TO CART" : "✔ ADDED"}
         </button>
-      </div>
+      </div>}
     </div>
   );
 };

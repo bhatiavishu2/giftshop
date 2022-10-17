@@ -93,7 +93,7 @@ const CreateProduct = () => {
             placeholder="Images"
             component={Input}
             multiple
-            accept="image/png, image/gif, image/jpeg"
+            accept="image/*, video/*"
             onChange={(event) => {
               setFieldValue("file", event.currentTarget.files);
             }}

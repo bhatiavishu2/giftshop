@@ -41,7 +41,7 @@ export const createProduct = gql`
       subCategory: $subCategory
       wholeSalePrice: $wholeSalePrice
       productDescription: $productDescription
-      shippingCharges: !shippingCharges
+      shippingCharges: $shippingCharges
     ) {
       id
       name

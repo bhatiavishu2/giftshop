@@ -11,6 +11,7 @@ import {createProduct} from 'graphql/products'
 const ProductSchema = Yup.object().shape({
     name: Yup.string().required("Name is required!"),
     price: Yup.string().required("Price is required!"),
+    shippingCharges: Yup.string().required("Shipping Charges is required!"),
     wholeSalePrice:Yup.string().required("Price is required!"),
     subCategory: Yup.string().required("Sub Category is required!"),
     productDescription: Yup.string().required("Product Description is required!"),
@@ -29,6 +30,7 @@ const CreateProduct = () => {
         wholeSalePrice:"",
         category: [],
         subCategory:"",
+        shippingCharges:"",
         images:[],
         productDescription:"",
         file:[]
@@ -64,6 +66,12 @@ const CreateProduct = () => {
             name="wholeSalePrice"
             type="text"
             placeholder="Whole Sale Price"
+            component={Input}
+          />
+            <Field
+            name="shippingCharges"
+            type="text"
+            placeholder="Shipping Charges"
             component={Input}
           />
           <Field

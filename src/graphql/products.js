@@ -32,6 +32,7 @@ export const createProduct = gql`
     $subCategory: String!
     $wholeSalePrice: String!
     $productDescription: String!
+    $shippingCharges: String!
   ) {
     createProduct(
       name: $name
@@ -40,6 +41,7 @@ export const createProduct = gql`
       subCategory: $subCategory
       wholeSalePrice: $wholeSalePrice
       productDescription: $productDescription
+      shippingCharges: !shippingCharges
     ) {
       id
       name

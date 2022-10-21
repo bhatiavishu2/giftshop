@@ -51,13 +51,14 @@ const QuickView = (props) => {
           <div className="quick-view">
             <div className="quick-view-image">
               <img
-                src={`${imagesUrl}/${props.product.images && props.product.images[0] }`}
+                src={`${imagesUrl}/${props.product.categoryImage || (props.product.images && props.product.images[0]) }`}
                 alt={props.product.name}
               />
+              {props.product.productDescription &&<p className="product-description">{props.product.productDescription}</p>}
             </div>
             <div className="quick-view-details">
               <span className="product-name">{props.product.name}</span>
-              <span className="product-price">{props.product.price}</span>
+              {props.product.price && <span className="product-price">{props.product.price}</span>}
             </div>
           </div>
         </div>

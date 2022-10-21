@@ -2,7 +2,6 @@ import React, { useEffect, useContext, useState } from "react";
 import ProductCard from "components/Product";
 import QuickView from "components/QuickView"
 import {  useQuery } from '@apollo/client';
-import { useHistory } from "react-router-dom";
 import {
   ProductsStateContext,
   ProductsDispatchContext,
@@ -12,14 +11,13 @@ import {
   getProducts
 } from "graphql/products";
 import { CommonStateContext } from "contexts/common";
-import { getCategories } from "graphql/category";
 
-const Home = () => {
-  const history = useHistory();
+const Product = ({match}) => {
   const { searchKeyword } = useContext(CommonStateContext);
   const dispatch = useContext(ProductsDispatchContext);
-  const { loading:isLoading, error, data = {} } = useQuery(getProducts);
-  const {loading:categoryLoading, data :{categories}  = {}} = useQuery(getCategories);
+  const { loading:isLoading, error, data = {} } = useQuery(getProducts,{
+    variables:{categoryId: match?.params?.categoryId}
+  });
   const [previewData, setPreviewData] = useState({})
   const [modalActive, setModalActive] = useState(false)
   const { products} = data ;
@@ -33,18 +31,17 @@ const Home = () => {
     });
     console.log(products)
 
-  // useEffect(() => {
-  //   getProducts(dispatch);
-  // }, []);
+
 
   const onPreview = (data) =>{
-    history.push(`/products/${data.id}`);
+    setPreviewData(data)
+    setModalActive(true)
   }
   const closeModal = () => {
     setModalActive(false);
   }
 
-  if (isLoading || categoryLoading) {
+  if (isLoading) {
     return (
       <div className="products-wrapper">
         <h1>Loading...</h1>
@@ -53,19 +50,13 @@ const Home = () => {
   }
   return (
     <div className="products-wrapper">
-      <div className="products"> 
-      { 
-         categories.map((data) => {
-          return <ProductCard  key={data.id} data={data} onClick={()=>onPreview(data)}/>;
-        })}
-      </div>
-      {/* <div className="products">
+      <div className="products">
         {products &&
           productsList.map((data) => {
             return <ProductCard onPreview={onPreview} key={data.id} data={data} />;
           })}
         
-      </div> */}
+      </div>
           <QuickView
           product={previewData}
           openModal={modalActive}
@@ -75,4 +66,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Product;

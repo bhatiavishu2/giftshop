@@ -10,9 +10,10 @@ import AuthLayout from "layouts/AuthLayout";
 import CommonLayout from "layouts/CommonLayout";
 import AuthPage from "pages/auth";
 import HomePage from "pages/home";
+import ProductPage from "pages/products";
 import RegisterPage from "pages/register";
 import CheckoutPage from "pages/checkout";
-import ProductPage from "pages/createproduct";
+import CreateProductPage from "pages/createproduct";
 import CategoryPage from "pages/createCategory";
 import SubCategoryPage from "pages/createSubCategory";
 import { endpoint } from "./constants";
@@ -56,7 +57,7 @@ const App = () => {
                     />
                     <RouteWrapper
                       path="/createProduct"
-                      component={ProductPage}
+                      component={CreateProductPage}
                       layout={AuthLayout}
                     />
                     <RouteWrapper
@@ -68,6 +69,11 @@ const App = () => {
                       path="/createSubCategory"
                       component={SubCategoryPage}
                       layout={AuthLayout}
+                    />
+                    <RouteWrapper
+                      path="/products/:categoryId"
+                      component={ProductPage}
+                      layout={CommonLayout}
                     />
                   </Switch>
                 </Router>

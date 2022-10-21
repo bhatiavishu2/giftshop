@@ -23,6 +23,9 @@
   .product {
     min-height: 355px;
     flex-basis: calc(25% - 32px);
+    &.category{
+      min-height: 250px;
+    }
     -webkit-flex-basis: calc(25% - 32px);
     @media (max-width: 768px) {
       flex-basis: calc(33% - 16px);
@@ -33,12 +36,18 @@
       flex-basis: calc(50% - 16px);
       -webkit-flex-basis: calc(50% - 16px);
       min-height: 313px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       .product-name, .product-description {
         height: 20px;
         overflow: hidden;
       }
       .product-action {
         padding: 16px 8px;
+      }
+      &.category{
+        min-height: 200px;
       }
     }
     @media (max-width: 320px) {

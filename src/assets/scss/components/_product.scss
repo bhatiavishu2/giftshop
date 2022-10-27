@@ -3,6 +3,12 @@
   margin: 16px;
   width: 200px;
   border-radius: 2px;
+  position: relative;
+  &:hover {
+    .delete-icon, .edit-icon{
+      opacity: 1;
+    }
+  }
   .product-image {
     overflow: hidden;
     border-radius: 2px 2px 0 0;
@@ -42,6 +48,20 @@
     color: $gray-medium;
     padding: 0 16px;
     text-align: center;
+  }
+  .delete-icon{
+    opacity: 0;
+    transition: all 1s ease-in;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .edit-icon{
+    opacity: 0;
+    transition: all 1s ease-in;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
   .product-action {
     padding: 16px;

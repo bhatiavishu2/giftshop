@@ -1,50 +1,30 @@
 import React, { useEffect, useContext, useState } from "react";
 import ProductCard from "components/Product";
-import QuickView from "components/QuickView"
-import {  useQuery } from '@apollo/client';
+import {  useQuery, useMutation } from '@apollo/client';
 import { useHistory } from "react-router-dom";
-import {
-  ProductsStateContext,
-  ProductsDispatchContext,
-
-} from "contexts/products";
-import {
-  getProducts
-} from "graphql/products";
-import { CommonStateContext } from "contexts/common";
-import { getCategories } from "graphql/category";
+import { getCategories, deleteCategory } from "graphql/category";
 
 const Home = () => {
   const history = useHistory();
-  const { searchKeyword } = useContext(CommonStateContext);
-  const dispatch = useContext(ProductsDispatchContext);
-  const { loading:isLoading, error, data = {} } = useQuery(getProducts);
-  const {loading:categoryLoading, data :{categories}  = {}} = useQuery(getCategories);
-  const [previewData, setPreviewData] = useState({})
-  const [modalActive, setModalActive] = useState(false)
-  const { products} = data ;
-  const productsList =
-    products &&
-    products.filter((product) => {
-      return (
-        product.name.toLowerCase().includes(searchKeyword.toLowerCase()) ||
-        !searchKeyword
-      );
-    });
-    console.log(products)
-
-  // useEffect(() => {
-  //   getProducts(dispatch);
-  // }, []);
+  const {loading:categoryLoading, data :{categories}  = {}, refetch} = useQuery(getCategories);
+  const [deleteItem] = useMutation(deleteCategory);
+  useEffect(()=>{refetch()},[])
 
   const onPreview = (data) =>{
     history.push(`/products/${data.id}`);
   }
-  const closeModal = () => {
-    setModalActive(false);
+  const handleOnDelete = async (data) =>{
+    await deleteItem({ variables:
+      {id:data.id}
+    })
+    await refetch()
   }
 
-  if (isLoading || categoryLoading) {
+  const handleOnEdit = (data) => {
+    history.push(`/categories/${data.id}`);
+  }
+
+  if (categoryLoading) {
     return (
       <div className="products-wrapper">
         <h1>Loading...</h1>
@@ -55,22 +35,10 @@ const Home = () => {
     <div className="products-wrapper">
       <div className="products"> 
       { 
-         categories.map((data) => {
-          return <ProductCard  key={data.id} data={data} onClick={()=>onPreview(data)}/>;
+        categories && categories.map((data) => {
+          return <ProductCard onEdit={handleOnEdit} onDelete={handleOnDelete}  key={data.id} data={data} onClick={()=>onPreview(data)}/>;
         })}
       </div>
-      {/* <div className="products">
-        {products &&
-          productsList.map((data) => {
-            return <ProductCard onPreview={onPreview} key={data.id} data={data} />;
-          })}
-        
-      </div> */}
-          <QuickView
-          product={previewData}
-          openModal={modalActive}
-          closeModal={closeModal}
-        />
     </div>
   );
 };

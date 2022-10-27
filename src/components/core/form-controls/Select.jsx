@@ -54,6 +54,7 @@ const Select = ({
           "is-invalid": touched[field.name] && errors[field.name]
         })}
         placeholder={placeholder}
+        {...props}
       />
       {touched[field.name] && errors[field.name] && (
         <div className="invalid-feedback">{errors[field.name]}</div>

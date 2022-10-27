@@ -10,6 +10,7 @@ export const getProducts = gql`
       images
       productDescription
       subCategory
+      shippingCharges
       subCategoryDetails {
         id
         name
@@ -21,6 +22,59 @@ export const getProducts = gql`
         }
       }
     }
+  }
+`;
+export const getProductById = gql`
+  query product($id: ID!) {
+    product(id: $id) {
+      id
+      name
+      price
+      wholeSalePrice
+      images
+      productDescription
+      subCategory
+      shippingCharges
+      subCategoryDetails {
+        id
+        name
+        category
+        categoryDetails {
+          id
+          name
+          categoryImage
+          subCategories {
+            id
+            name
+            category
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const updateProduct = gql`
+  mutation editProduct(
+    $id: ID!
+    $name: String!
+    $price: String!
+    $images: [String]!
+    $subCategory: String!
+    $wholeSalePrice: String!
+    $productDescription: String!
+    $shippingCharges: String!
+  ) {
+    editProduct(
+      id: $id
+      name: $name
+      price: $price
+      images: $images
+      subCategory: $subCategory
+      wholeSalePrice: $wholeSalePrice
+      productDescription: $productDescription
+      shippingCharges: $shippingCharges
+    )
   }
 `;
 
@@ -50,6 +104,13 @@ export const createProduct = gql`
       images
       subCategory
       productDescription
+      shippingCharges
     }
+  }
+`;
+
+export const deleteProduct = gql`
+  mutation deleteProduct($id: ID!) {
+    deleteProduct(id: $id)
   }
 `;

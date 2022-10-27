@@ -1,23 +1,28 @@
 import React, { useEffect, useContext, useState } from "react";
 import ProductCard from "components/Product";
 import QuickView from "components/QuickView"
-import {  useQuery } from '@apollo/client';
+import {  useQuery,useMutation } from '@apollo/client';
+import { useHistory } from "react-router-dom";
 import {
   ProductsStateContext,
   ProductsDispatchContext,
 
 } from "contexts/products";
 import {
-  getProducts
+  getProducts,
+  deleteProduct
 } from "graphql/products";
 import { CommonStateContext } from "contexts/common";
 
 const Product = ({match}) => {
   const { searchKeyword } = useContext(CommonStateContext);
   const dispatch = useContext(ProductsDispatchContext);
-  const { loading:isLoading, error, data = {} } = useQuery(getProducts,{
+  const history = useHistory();
+  const { loading:isLoading, error, data = {}, refetch } = useQuery(getProducts,{
     variables:{categoryId: match?.params?.categoryId}
   });
+  useEffect(()=>{refetch()},[])
+  const [deleteItem] = useMutation(deleteProduct);
   const [previewData, setPreviewData] = useState({})
   const [modalActive, setModalActive] = useState(false)
   const { products} = data ;
@@ -40,6 +45,15 @@ const Product = ({match}) => {
   const closeModal = () => {
     setModalActive(false);
   }
+  const handleOnDelete = async (data) =>{
+    await deleteItem({ variables:
+      {id:data.id}
+    })
+    await refetch()
+  }
+  const handleOnEdit = (data) => {
+    history.push(`/editProduct/${data.id}`);
+  }
 
   if (isLoading) {
     return (
@@ -53,7 +67,7 @@ const Product = ({match}) => {
       <div className="products">
         {products &&
           productsList.map((data) => {
-            return <ProductCard onPreview={onPreview} key={data.id} data={data} />;
+            return <ProductCard onEdit={handleOnEdit} onDelete={handleOnDelete}  onPreview={onPreview} key={data.id} data={data} />;
           })}
         
       </div>

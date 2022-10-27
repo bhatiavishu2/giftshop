@@ -16,6 +16,8 @@ import CheckoutPage from "pages/checkout";
 import CreateProductPage from "pages/createproduct";
 import CategoryPage from "pages/createCategory";
 import SubCategoryPage from "pages/createSubCategory";
+import EditCategoryPage from "pages/editcategory";
+import EditProductPage from "pages/editproduct";
 import { endpoint } from "./constants";
 import "assets/scss/style.scss";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
@@ -74,6 +76,16 @@ const App = () => {
                       path="/products/:categoryId"
                       component={ProductPage}
                       layout={CommonLayout}
+                    />
+                    <RouteWrapper
+                      path="/categories/:categoryId"
+                      component={EditCategoryPage}
+                      layout={AuthLayout}
+                    />
+                    <RouteWrapper
+                      path="/editProduct/:id"
+                      component={EditProductPage}
+                      layout={AuthLayout}
                     />
                   </Switch>
                 </Router>

@@ -1,3 +1,3 @@
-export const endpoint = "http://localhost:3001/graphql";
-export const imagesUrl = "http://localhost:3001/static";
-export const uploadUrl = "http://localhost:3001/file/upload";
+export const endpoint = "https://api.bbeventgift.shop/graphql";
+export const imagesUrl = "https://api.bbeventgift.shop/static";
+export const uploadUrl = "https://api.bbeventgift.shop/file/upload";

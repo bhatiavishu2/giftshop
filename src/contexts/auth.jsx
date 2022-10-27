@@ -72,7 +72,7 @@ const AuthProvider = ({ children }) => {
       result = result.concat(item.permissionsDetails.map(permission => permission.name))
         return result
      },[])
-     return allPermissions.some(prmsn => permissions.includes(prmsn));
+     return (allPermissions||[]).some(prmsn => permissions.includes(prmsn));
     }
   };
   const [state, dispatch] = useReducer(reducer, persistedUserState);

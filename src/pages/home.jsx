@@ -33,7 +33,7 @@ const Home = () => {
   }
   return (
     <div className="products-wrapper">
-      <div className="products"> 
+      <div className="container products"> 
       { 
         categories && categories.map((data) => {
           return <ProductCard onEdit={handleOnEdit} onDelete={handleOnDelete}  key={data.id} data={data} onClick={()=>onPreview(data)}/>;

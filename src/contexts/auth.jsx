@@ -68,11 +68,11 @@ const AuthProvider = ({ children }) => {
     user: persistedUser,
     isLoggedIn: _get(persistedUser, "username", "").length > 0,
     hasPermissions: (permissions) =>{
-     const allPermissions =  persistedUser?.context.roleDetails.reduce((result,item) =>{
+     const allPermissions =  persistedUser?.context?.roleDetails.reduce((result,item) =>{
       result = result.concat(item.permissionsDetails.map(permission => permission.name))
         return result
-     },[])
-     return (allPermissions||[]).some(prmsn => permissions.includes(prmsn));
+     },[]) || []
+     return !permissions || (allPermissions||[]).some(prmsn => permissions.includes(prmsn));
     }
   };
   const [state, dispatch] = useReducer(reducer, persistedUserState);

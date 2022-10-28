@@ -64,7 +64,7 @@ const Product = ({match}) => {
   }
   return (
     <div className="products-wrapper">
-      <div className="products">
+      <div className="container products">
         {products &&
           productsList.map((data) => {
             return <ProductCard onEdit={handleOnEdit} onDelete={handleOnDelete}  onPreview={onPreview} key={data.id} data={data} />;

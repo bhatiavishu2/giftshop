@@ -26,6 +26,7 @@ const CreateProduct = () => {
 
   return (
     <Formik
+
       initialValues={{
         name: "",
         price: "",
@@ -49,7 +50,7 @@ const CreateProduct = () => {
       }}
     >
       {() => (
-        <Form>
+        <Form  className="form-container">
           <Field
             name="name"
             type="text"

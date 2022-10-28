@@ -62,7 +62,7 @@ const EditProduct = ({match}) => {
       }}
     >
       {({values,setFieldValue}) => (
-        <Form>
+        <Form className="form-container">
           <Field
             name="name"
             type="text"

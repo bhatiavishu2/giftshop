@@ -50,7 +50,7 @@ const EditCategory = ({match}) => {
       }}
     >
       {({isSubmitting,values, setFieldValue}) => (
-        <Form>
+        <Form className="form-container">
           <Field
             name="name"
             type="text"

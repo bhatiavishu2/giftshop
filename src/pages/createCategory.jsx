@@ -22,6 +22,7 @@ const CreateCategory = () => {
  
   return (
     <Formik
+    
       initialValues={{
         name: "",
         categoryImage:'',
@@ -44,7 +45,7 @@ const CreateCategory = () => {
       }}
     >
       {({isSubmitting,values, setFieldValue}) => (
-        <Form>
+        <Form className="form-container">
           <Field
             name="name"
             type="text"

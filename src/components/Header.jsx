@@ -29,7 +29,7 @@ const Header = (props) => {
 
   return (
     <header>
-      <div className="container">
+      <div className="container1">
         <div className="brand">
           <Link to="/">
             <img

@@ -227,7 +227,7 @@ const Checkout = () => {
 
   return (
     <div className="checkout-page">
-      <div className="container">
+      <div className="container1">
         <div className="order-details">
           <ul className="timeline">
             <li

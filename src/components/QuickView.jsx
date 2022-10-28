@@ -41,7 +41,7 @@ const QuickView = (props) => {
           props.openModal ? "modal-wrapper active" : "modal-wrapper"
         }
       >
-        <div className="modal" ref={modalElement}>
+        <div className="modal1" ref={modalElement}>
           <button
             type="button"
             className="close"
@@ -52,7 +52,7 @@ const QuickView = (props) => {
           <div className="quick-view">
             <div className="quick-view-image">
       <Carousel showArrows={false} infiniteLoop showThumbs={false} showStatus={true} autoFocus={false} >
-              {images.map(image=><img src={`${imagesUrl}/${image}`} alt={props.product.name}  />)}
+              {images.map((image,index)=><img key={index} src={`${imagesUrl}/${image}`} alt={props.product.name}  />)}
             </Carousel>
               {props.product.productDescription &&<p className="product-description">{props.product.productDescription}</p>}
             </div>

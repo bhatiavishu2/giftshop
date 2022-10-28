@@ -22,11 +22,98 @@ import { endpoint } from "./constants";
 import "assets/scss/style.scss";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import { Permissions } from "./constants/common";
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   uri: endpoint
 });
+
+export const navConfig = [
+  {
+    id: "home",
+    path: "/",
+    exact: true,
+    component: HomePage,
+    layout: CommonLayout,
+    showNav: false
+  },
+  {
+    id: "checkout",
+    path: "/checkout",
+    component: CheckoutPage,
+    layout: CommonLayout,
+    showNav: false
+  },
+  {
+    id: "auth",
+    path: "/auth",
+    component: AuthPage,
+    layout: AuthLayout,
+    showNav: false
+  },
+  {
+    id: "register",
+    path: "/register",
+    component: RegisterPage,
+    layout: AuthLayout,
+    showNav: false
+  },
+  {
+    id: "createProduct",
+    title: "Create Product",
+    path: "/createProduct",
+    component: CreateProductPage,
+    layout: CommonLayout,
+    permissions: [Permissions.CREATE_PRODUCT],
+    showNav: true,
+    isPrivate: true
+  },
+  {
+    id: "createCategory",
+    title: "Create Category",
+    path: "/createCategory",
+    component: CategoryPage,
+    layout: CommonLayout,
+    permissions: [Permissions.CREATE_CATEGORY],
+    showNav: true,
+    isPrivate: true
+  },
+  {
+    id: "createSubCategory",
+    title: "Create Sub Category",
+    path: "/createSubCategory",
+    component: SubCategoryPage,
+    layout: CommonLayout,
+    permissions: [Permissions.CREATE_CATEGORY],
+    showNav: true,
+    isPrivate: true
+  },
+  {
+    id: "productByCategory",
+    path: "/products/:categoryId",
+    component: ProductPage,
+    layout: CommonLayout,
+    showNav: false
+  },
+  {
+    id: "categoryById",
+    path: "/categories/:categoryId",
+    component: EditCategoryPage,
+    layout: CommonLayout,
+    showNav: false,
+    isPrivate: true
+  },
+  {
+    id: "editProduct",
+    path: "/editProduct/:id",
+    component: EditProductPage,
+    layout: CommonLayout,
+    showNav: false,
+    isPrivate: true
+  }
+];
 
 const App = () => {
   return (
@@ -38,57 +125,17 @@ const App = () => {
               <CheckoutProvider>
                 <Router>
                   <Switch>
-                    <RouteWrapper
-                      path="/"
-                      exact
-                      component={HomePage}
-                      layout={CommonLayout}
-                    />
-                    <RouteWrapper
-                      path="/checkout"
-                      component={CheckoutPage}
-                      layout={CommonLayout}
-                    />
-                    <RouteWrapper
-                      path="/auth"
-                      component={AuthPage}
-                      layout={AuthLayout}
-                    />
-                    <RouteWrapper
-                      path="/register"
-                      component={RegisterPage}
-                      layout={AuthLayout}
-                    />
-                    <RouteWrapper
-                      path="/createProduct"
-                      component={CreateProductPage}
-                      layout={AuthLayout}
-                    />
-                    <RouteWrapper
-                      path="/createCategory"
-                      component={CategoryPage}
-                      layout={AuthLayout}
-                    />
-                    <RouteWrapper
-                      path="/createSubCategory"
-                      component={SubCategoryPage}
-                      layout={AuthLayout}
-                    />
-                    <RouteWrapper
-                      path="/products/:categoryId"
-                      component={ProductPage}
-                      layout={CommonLayout}
-                    />
-                    <RouteWrapper
-                      path="/categories/:categoryId"
-                      component={EditCategoryPage}
-                      layout={AuthLayout}
-                    />
-                    <RouteWrapper
-                      path="/editProduct/:id"
-                      component={EditProductPage}
-                      layout={AuthLayout}
-                    />
+                    {navConfig.map((nav) => (
+                      <RouteWrapper
+                        key={nav.id}
+                        path={nav.path}
+                        exact={!!nav.exact}
+                        component={nav.component}
+                        layout={nav.layout}
+                        isPrivate={!!nav.isPrivate}
+                        permissions={nav.permissions}
+                      />
+                    ))}
                   </Switch>
                 </Router>
               </CheckoutProvider>

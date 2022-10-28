@@ -6,14 +6,15 @@ function RouteWrapper({
   component: Component,
   layout: Layout,
   isPrivate = false,
+  permissions,
   ...rest
 }) {
-  const { isLoggedIn = false } = useContext(AuthStateContext);
+  const { user, hasPermissions } = useContext(AuthStateContext);
   return (
     <Route
       {...rest}
       render={(props) => {
-        if (isPrivate && !isLoggedIn) {
+        if (isPrivate && (!hasPermissions(permissions))) {
           return (
             <Redirect
               to={{

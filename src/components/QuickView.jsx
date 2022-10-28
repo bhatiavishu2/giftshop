@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { findDOMNode } from "react-dom";
 import { imagesUrl } from "../constants";
+import { Carousel } from "react-responsive-carousel";
 
 const QuickView = (props) => {
     const modalElement = useRef();
@@ -33,7 +34,7 @@ const QuickView = (props) => {
     props.closeModal();
   }
 
-
+  const {categoryImage, images} = props.product
     return (
       <div
         className={
@@ -50,10 +51,9 @@ const QuickView = (props) => {
           </button>
           <div className="quick-view">
             <div className="quick-view-image">
-              <img
-                src={`${imagesUrl}/${props.product.categoryImage || (props.product.images && props.product.images[0]) }`}
-                alt={props.product.name}
-              />
+      <Carousel showArrows={false} infiniteLoop showThumbs={false} showStatus={true} autoFocus={false} >
+              {images.map(image=><img src={`${imagesUrl}/${image}`} alt={props.product.name}  />)}
+            </Carousel>
               {props.product.productDescription &&<p className="product-description">{props.product.productDescription}</p>}
             </div>
             <div className="quick-view-details">

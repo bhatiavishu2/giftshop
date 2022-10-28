@@ -26,6 +26,13 @@
       overflow: auto;
       max-height: 97%;
     }
+    .carousel .carousel-status {
+      top: 28px;
+      right: 9px;
+    }
+    .product-description{
+      padding: 10px;
+    }
     .close {
       position: absolute;
       top: 0px;
@@ -38,6 +45,7 @@
       &:hover {
         background: $gray-dark-bg;
       }
+      z-index: 2;
     }
   }
   .quick-view-details {

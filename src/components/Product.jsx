@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { CartDispatchContext, addToCart } from "contexts/cart";
 import { AuthStateContext } from "contexts/auth";
 import { imagesUrl} from "../constants";
+import { confirmAlert } from 'react-confirm-alert';
 import {Permissions} from '../constants/common'
 
 const ProductCard = ({ data, onPreview , onClick, onDelete, onEdit}) => {
@@ -27,9 +28,23 @@ const ProductCard = ({ data, onPreview , onClick, onDelete, onEdit}) => {
       </div>
       {name && <h4 className="product-name">{name}</h4>}
      {price && <p className="product-price">{price}</p>}
-     {authState.hasPermissions([Permissions.DELETE_CATEGORY, Permissions.DELETE_PRODUCT]) && <button className="outline delete-icon" onClick={(e) => {
+     {authState.hasPermissions([Permissions.DELETE_CATEGORY, Permissions.DELETE_PRODUCT]) && <button className="outline delete-icon" onClick={async (e) => {
       e.stopPropagation()
-      onDelete(data)
+      confirmAlert({
+        title: 'Confirm to Delete',
+        message: 'Are you sure you want to delete?.',
+        buttons: [
+          {
+            label: 'Yes',
+            onClick: () => onDelete(data)
+          },
+          {
+            label: 'No',
+            onClick: () => ({})
+          }
+        ]
+      });
+     
      }}>
           <i className="rsc-icon-delete" />
         </button>}

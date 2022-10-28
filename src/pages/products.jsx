@@ -23,7 +23,7 @@ const Product = ({match}) => {
   });
   useEffect(()=>{refetch()},[])
   const [deleteItem] = useMutation(deleteProduct);
-  const [previewData, setPreviewData] = useState({})
+  const [previewData, setPreviewData] = useState(null)
   const [modalActive, setModalActive] = useState(false)
   const { products} = data ;
   const productsList =
@@ -71,11 +71,11 @@ const Product = ({match}) => {
           })}
         
       </div>
-          <QuickView
+          {previewData && <QuickView
           product={previewData}
           openModal={modalActive}
           closeModal={closeModal}
-        />
+        />}
     </div>
   );
 };

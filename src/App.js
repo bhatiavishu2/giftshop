@@ -20,6 +20,8 @@ import EditCategoryPage from "pages/editcategory";
 import EditProductPage from "pages/editproduct";
 import { endpoint } from "./constants";
 import "assets/scss/style.scss";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import "react-confirm-alert/src/react-confirm-alert.css";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 const client = new ApolloClient({
   cache: new InMemoryCache(),

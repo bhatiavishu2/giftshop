@@ -66,7 +66,7 @@ const ProductCard = ({ data, onPreview , onClick, onDelete, onEdit}) => {
           {!isAdded ? "ADD TO CART" : "✔ ADDED"}
         </button>
       </div>}
-      <ReactWhatsapp number="+91-9818855029" message={window.location.href} >WhatsApp</ReactWhatsapp>
+      <ReactWhatsapp number="+91-9818855029" message={`${window.location.href}`} >WhatsApp</ReactWhatsapp>
     </div>
   );
 };

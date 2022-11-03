@@ -54,7 +54,7 @@ const QuickView = (props) => {
       <Carousel showArrows={false} infiniteLoop showThumbs={false} showStatus={true} autoFocus={false} >
               {images.map((image,index)=><img key={index} src={`${imagesUrl}/${image}`} alt={props.product.name}  />)}
             </Carousel>
-              {props.product.productDescription &&<p className="product-description">{props.product.productDescription}</p>}
+              {props.product.productDescription &&<p className="product-description" dangerouslySetInnerHTML={{__html:props.product.productDescription}}></p>}
             </div>
             <div className="quick-view-details">
               <span className="product-name">{props.product.name}</span>

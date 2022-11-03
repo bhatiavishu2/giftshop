@@ -10,7 +10,7 @@ const ProductCard = ({ data, onPreview , onClick, onDelete, onEdit}) => {
   const [isAdded, setIsAdded] = useState(false);
   const dispatch = useContext(CartDispatchContext);
   const authState = useContext(AuthStateContext);
-  const { categoryImage,images, name, price, id, stock, productDescription, shippingCharges } = data;
+  const { categoryImage,images, name, price, shippingCharges } = data;
 
   const handleAddToCart = () => {
     const product = { ...data, quantity: 1 };

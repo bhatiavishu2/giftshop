@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import _get from "lodash.get";
 import Input from "components/core/form-controls/Input";
 import Select from "components/core/form-controls/Select";
+import Textarea from "components/core/form-controls/Textarea"
 import { getCategories} from 'graphql/category';
 import { useHistory } from "react-router-dom";
 import {  useMutation, useQuery } from '@apollo/client';
@@ -90,7 +91,7 @@ const EditProduct = ({match}) => {
             name="productDescription"
             type="text"
             placeholder="Product Description"
-            component={Input}
+            component={Textarea}
           />
             <Field
             name="category"

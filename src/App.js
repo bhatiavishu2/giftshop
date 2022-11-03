@@ -16,6 +16,10 @@ import CheckoutPage from "pages/checkout";
 import CreateProductPage from "pages/createproduct";
 import CategoryPage from "pages/createCategory";
 import SubCategoryPage from "pages/createSubCategory";
+import PermissionPage from "pages/permissions";
+import CreatePermissionPage from "pages/createPermission";
+import EditPermissionPage from "pages/editPermission";
+import RolePage from "pages/roles";
 import EditCategoryPage from "pages/editcategory";
 import EditProductPage from "pages/editproduct";
 import { endpoint } from "./constants";
@@ -110,6 +114,53 @@ export const navConfig = [
     id: "editProduct",
     path: "/editProduct/:id",
     component: EditProductPage,
+    layout: CommonLayout,
+    showNav: false,
+    isPrivate: true
+  },
+  {
+    id: "createRole",
+    title: "Create Role",
+    path: "/createRole",
+    component: RolePage,
+    layout: CommonLayout,
+
+    showNav: false,
+    isPrivate: true
+  },
+  {
+    id: "roles",
+    title: "Roles",
+    path: "/roles",
+    component: RolePage,
+    layout: CommonLayout,
+
+    showNav: true,
+    isPrivate: true
+  },
+  {
+    id: "permissions",
+    title: "Permissions",
+    path: "/permissions",
+    component: PermissionPage,
+    layout: CommonLayout,
+    showNav: true,
+    isPrivate: true
+  },
+  {
+    id: "createPermission",
+    title: "Create Permission",
+    path: "/createPermission",
+    component: CreatePermissionPage,
+    layout: CommonLayout,
+    // permissions: [Permissions.CREATE_PERMISSION],
+    showNav: false,
+    isPrivate: true
+  },
+  {
+    id: "editPermission",
+    path: "/editPermission/:id",
+    component: EditPermissionPage,
     layout: CommonLayout,
     showNav: false,
     isPrivate: true

@@ -23,7 +23,7 @@ const ProductCard = ({ data, onPreview , onClick, onDelete, onEdit}) => {
 
   return (
     <div className={`product ${onClick?'category':''}`} onClick={()=>onClick && onClick(data)}>
-      
+      <div>
       <div className="product-image">
         <img src={`${imagesUrl}/${categoryImage || (images && images[0])}`} alt={name} onClick={()=>onPreview && onPreview(data)} />
       </div>
@@ -66,7 +66,8 @@ const ProductCard = ({ data, onPreview , onClick, onDelete, onEdit}) => {
           {!isAdded ? "ADD TO CART" : "✔ ADDED"}
         </button>
       </div>}
-      <ReactWhatsapp number="+91-9818855029" message={`${window.location.href}`} >WhatsApp</ReactWhatsapp>
+      </div>
+      {onPreview && <ReactWhatsapp className="whatsapp" number="+91-9818855029" message={`${window.location.href}?productId=${data.id}`} ><img src="/whatsapp.png" width="50" alt="whatsapp"/></ReactWhatsapp>}
     </div>
   );
 };

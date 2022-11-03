@@ -4,11 +4,6 @@ import QuickView from "components/QuickView"
 import {  useQuery,useMutation } from '@apollo/client';
 import { useHistory } from "react-router-dom";
 import {
-  ProductsStateContext,
-  ProductsDispatchContext,
-
-} from "contexts/products";
-import {
   getProducts,
   deleteProduct
 } from "graphql/products";
@@ -16,17 +11,19 @@ import { CommonStateContext } from "contexts/common";
 
 const Product = ({match}) => {
   const { searchKeyword } = useContext(CommonStateContext);
-  const dispatch = useContext(ProductsDispatchContext);
   const history = useHistory();
   const { loading:isLoading, error, data = {}, refetch } = useQuery(getProducts,{
     variables:{categoryId: match?.params?.categoryId}
+  });
+  const params = new Proxy(new URLSearchParams(history.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
   });
   useEffect(()=>{refetch()},[])
   const [deleteItem] = useMutation(deleteProduct);
   const [previewData, setPreviewData] = useState(null)
   const [modalActive, setModalActive] = useState(false)
   const { products} = data ;
-  const productsList =
+  let productsList =
     products &&
     products.filter((product) => {
       return (
@@ -34,8 +31,10 @@ const Product = ({match}) => {
         !searchKeyword
       );
     });
-    console.log(products)
 
+    if(params.productId){
+      productsList = productsList && productsList.filter(product => product.id === params.productId)
+    }
 
 
   const onPreview = (data) =>{

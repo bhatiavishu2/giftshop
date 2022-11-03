@@ -26,7 +26,6 @@ const EditProduct = ({match}) => {
   const  { loading:productLoading, data: productData  ={} } = useQuery(getProductById, {variables:{
     id: match?.params?.id
   }});
-  console.log(productLoading);
   if(productLoading || isLoading){
     return null
   }

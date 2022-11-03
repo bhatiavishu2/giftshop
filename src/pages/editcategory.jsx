@@ -18,7 +18,6 @@ const EditCategory = ({match}) => {
   const history = useHistory();
   const location = useLocation();
   const [submitCategory] = useMutation(updateCategory);
-  console.log(location)
   const  { loading:isLoading, error, data = {} } = useQuery(getCategoryById, {variables:{
     id: match?.params?.categoryId
   }});

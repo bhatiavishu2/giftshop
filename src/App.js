@@ -130,7 +130,6 @@ export const navConfig = [
     path: "/createRole",
     component: CreateRolePage,
     layout: CommonLayout,
-    permissions: [Permissions.CREATE_PRODUCT],
     showNav: false,
     isPrivate: true,
     permissions: [Permissions.CREATE_ROLE]

@@ -28,7 +28,7 @@ const ProductCard = ({ data, onPreview , onClick, onDelete, onEdit}) => {
         <img src={`${imagesUrl}/${categoryImage || (images && images[0])}`} alt={name} onClick={()=>onPreview && onPreview(data)} />
       </div>
       {name && <h4 className="product-name">{name}</h4>}
-    <div> {price && <p className="product-price">{authState.hasPermissions(Permissions.RESELLER)?  wholeSalePrice:price}</p>}
+    <div> {price && <p className="product-price">{authState.hasPermissions([Permissions.RESELLER])?  wholeSalePrice:price}</p>}
      {shippingCharges && <p className="product-price shipping-charges">{shippingCharges || 0} (Shipping Charges)</p>}
      </div>
      {authState.hasPermissions([Permissions.DELETE_CATEGORY, Permissions.DELETE_PRODUCT]) && <button className="outline delete-icon" onClick={async (e) => {
@@ -67,7 +67,7 @@ const ProductCard = ({ data, onPreview , onClick, onDelete, onEdit}) => {
         </button>
       </div>}
       </div>
-      {onPreview && <ReactWhatsapp className="whatsapp" number="+91-9818855029" message={`${window.location.href}?productId=${data.id}`} ><img src="/whatsapp.png" width="50" alt="whatsapp"/></ReactWhatsapp>}
+      {onPreview && <ReactWhatsapp className="whatsapp" number={authState.hasPermissions([Permissions.RESELLER])?'+91-9582611877':'+91-9818855029'} message={`${window.location.href}?productId=${data.id}`} ><img src="/whatsapp.png" width="50" alt="whatsapp"/></ReactWhatsapp>}
     </div>
   );
 };

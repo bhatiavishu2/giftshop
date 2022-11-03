@@ -59,7 +59,7 @@ const QuickView = (props) => {
             </div>
             <div className="quick-view-details">
               <span className="product-name">{props.product.name}</span>
-              {props.product.price && <span className="product-price">{(authState.hasPermissions(Permissions.RESELLER)? Number(props.product.wholeSalePrice):Number(props.product.price)) + Number(props.product.shippingCharges)}</span>}
+              {props.product.price && <span className="product-price">{(authState.hasPermissions([Permissions.RESELLER])? Number(props.product.wholeSalePrice):Number(props.product.price)) + Number(props.product.shippingCharges)}</span>}
               
             </div>
           </div>

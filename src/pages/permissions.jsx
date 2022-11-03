@@ -61,7 +61,7 @@ const Permissions = () => {
     );
   }
   return (
-    <div style={{display:'flex', flexDirection:'column', alignItems: 'center'}}>
+    <div className="container">
           <Link to="/createPermission" className="btn btn-dark" style={{width:'200px'}}>
             Create Permission
           </Link>

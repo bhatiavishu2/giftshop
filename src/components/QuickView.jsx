@@ -1,11 +1,12 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect,useContext } from "react";
 import { findDOMNode } from "react-dom";
+import { AuthStateContext } from "contexts/auth";
 import { imagesUrl } from "../constants";
 import { Carousel } from "react-responsive-carousel";
 
 const QuickView = (props) => {
     const modalElement = useRef();
-
+    const authState = useContext(AuthStateContext);
   
   useEffect(() => {
     document.addEventListener(
@@ -58,7 +59,7 @@ const QuickView = (props) => {
             </div>
             <div className="quick-view-details">
               <span className="product-name">{props.product.name}</span>
-              {props.product.price && <span className="product-price">{Number(props.product.price) + Number(props.product.shippingCharges)}</span>}
+              {props.product.price && <span className="product-price">{(authState.hasPermissions(Permissions.RESELLER)? Number(props.product.wholeSalePrice):Number(props.product.price)) + Number(props.product.shippingCharges)}</span>}
               
             </div>
           </div>

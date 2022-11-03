@@ -10,7 +10,7 @@ const ProductCard = ({ data, onPreview , onClick, onDelete, onEdit}) => {
   const [isAdded, setIsAdded] = useState(false);
   const dispatch = useContext(CartDispatchContext);
   const authState = useContext(AuthStateContext);
-  const { categoryImage,images, name, price, shippingCharges } = data;
+  const { categoryImage,images, name, price, shippingCharges, wholeSalePrice } = data;
 
   const handleAddToCart = () => {
     const product = { ...data, quantity: 1 };
@@ -28,7 +28,7 @@ const ProductCard = ({ data, onPreview , onClick, onDelete, onEdit}) => {
         <img src={`${imagesUrl}/${categoryImage || (images && images[0])}`} alt={name} onClick={()=>onPreview && onPreview(data)} />
       </div>
       {name && <h4 className="product-name">{name}</h4>}
-    <div> {price && <p className="product-price">{price}</p>}
+    <div> {price && <p className="product-price">{authState.hasPermissions(Permissions.RESELLER)?  wholeSalePrice:price}</p>}
      {shippingCharges && <p className="product-price shipping-charges">{shippingCharges || 0} (Shipping Charges)</p>}
      </div>
      {authState.hasPermissions([Permissions.DELETE_CATEGORY, Permissions.DELETE_PRODUCT]) && <button className="outline delete-icon" onClick={async (e) => {

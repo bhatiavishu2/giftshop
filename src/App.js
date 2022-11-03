@@ -24,6 +24,8 @@ import EditRolePage from "pages/editRole";
 import RolePage from "pages/roles";
 import EditCategoryPage from "pages/editcategory";
 import EditProductPage from "pages/editproduct";
+import UserRolePage from "pages/userRoles";
+import CreateUserRolePage from "pages/createUserRole";
 import { endpoint } from "./constants";
 import "assets/scss/style.scss";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -180,6 +182,26 @@ export const navConfig = [
     layout: CommonLayout,
     showNav: false,
     isPrivate: true
+  },
+  {
+    id: "userRoles",
+    title: "User Roles",
+    path: "/userRoles",
+    component: UserRolePage,
+    layout: CommonLayout,
+    showNav: true,
+    isPrivate: true,
+    permissions: [Permissions.CREATE_USER_ROLE]
+  },
+  {
+    id: "createUserRole",
+    title: "Create User Role",
+    path: "/createUserRole",
+    component: CreateUserRolePage,
+    layout: CommonLayout,
+    showNav: false,
+    isPrivate: true,
+    permissions: [Permissions.CREATE_USER_ROLE]
   }
 ];
 

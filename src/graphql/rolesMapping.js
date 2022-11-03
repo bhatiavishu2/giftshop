@@ -1,22 +1,32 @@
 import { gql } from "@apollo/client";
 
-export const createRole = gql`
-  mutation createRole($name: String!, $permissions: [String]) {
-    createRole(name: $name, permissions: $permissions) {
+export const createUserRole = gql`
+  mutation createRoleMapping($userId: ID!, $roleIds: [String]) {
+    createRoleMapping(roleIds: $roleIds, userId: $userId) {
       id
-      name
     }
   }
 `;
 
-export const getRoles = gql`
-  query roles {
-    roles {
+export const getRolesMapping = gql`
+  query rolesMapping {
+    rolesMapping {
       id
-      name
-      permissions
-      permissionsDetails {
+      userId
+      roleIds
+      userDetails {
+        id
+        phone
         name
+      }
+      roleDetails {
+        id
+        permissions
+        name
+        permissionsDetails {
+          id
+          name
+        }
       }
     }
   }

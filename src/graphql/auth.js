@@ -34,3 +34,13 @@ export const createUser = gql`
     }
   }
 `;
+
+export const getUsers = gql`
+  query users {
+    users {
+      id
+      phone
+      name
+    }
+  }
+`;

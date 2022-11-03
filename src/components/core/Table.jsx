@@ -1,14 +1,16 @@
 import Table from "react-bootstrap/Table";
 import { confirmAlert } from 'react-confirm-alert';
 
-function ResponsiveTable({ data, onEdit, onDelete }) {
+function ResponsiveTable({ data, onEdit, onDelete, disableActions}) {
   const keys = data[0];
   const { __typename, ...restKeys } = keys;
   const getColumnValue = (item, key) =>{
   if(typeof item[key] === 'string'){
     return item[key]
   } else if(Array.isArray(item[key])){
-    return item[key].map(i => i.name).join(' , ')
+    return typeof item[key][0] === 'string'? item[key].join(' , '): item[key].map(item => item.name).join(' , ')
+  } else if(typeof item[key] === 'object'){
+    return item[key].name
   }
     
   }
@@ -19,8 +21,8 @@ function ResponsiveTable({ data, onEdit, onDelete }) {
           {Object.keys(restKeys).map((key, index) => (
             <th key={key + index}>{key}</th>
           ))}
-          <th>Edit</th>
-          <th>Delete</th>
+         {!disableActions && <th>Edit</th>}
+         {!disableActions && <th>Delete</th>}
         </tr>
       </thead>
       <tbody>
@@ -29,7 +31,7 @@ function ResponsiveTable({ data, onEdit, onDelete }) {
             {Object.keys(restKeys).map((key) => (
               <td key={key + index}>{getColumnValue(item, key)}</td>
             ))}
-            <td>
+            {!disableActions && <td>
               {" "}
               {
                 <button
@@ -42,8 +44,8 @@ function ResponsiveTable({ data, onEdit, onDelete }) {
                   <i className="rsc-icon-edit" />
                 </button>
               }
-            </td>
-            <td>
+            </td>}
+            {!disableActions && <td>
               {" "}
               {
                <button className="outline delete-icon" onClick={async (e) => {
@@ -67,7 +69,7 @@ function ResponsiveTable({ data, onEdit, onDelete }) {
                     <i className="rsc-icon-delete" />
                   </button>
               }
-            </td>
+            </td>}
           </tr>
         ))}
       </tbody>

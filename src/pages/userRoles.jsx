@@ -5,15 +5,15 @@ import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import {
-  getRoles,
+  getRolesMapping,
   deleteRole
-} from "graphql/roles";
+} from "graphql/rolesMapping";
 import { CommonStateContext } from "contexts/common";
 
 const Roles = () => {
   const { searchKeyword } = useContext(CommonStateContext);
   const history = useHistory();
-  const { loading:isLoading, error, data = {}, refetch } = useQuery(getRoles);
+  const { loading:isLoading, error, data = {}, refetch } = useQuery(getRolesMapping);
   const params = new Proxy(new URLSearchParams(history.location.search), {
     get: (searchParams, prop) => searchParams.get(prop),
   });
@@ -44,13 +44,13 @@ const Roles = () => {
     setModalActive(false);
   }
   const handleOnDelete = async (data) =>{
-    await deleteItem({ variables:
-      {id:data.id}
-    })
-    await refetch()
+    // await deleteItem({ variables:
+    //   {id:data.id}
+    // })
+    // await refetch()
   }
   const handleOnEdit = (data) => {
-    history.push(`/editRole/${data.id}`);
+    // history.push(`/editRole/${data.id}`);
   }
 
   if (isLoading) {
@@ -61,11 +61,11 @@ const Roles = () => {
     );
   }
   return (
-    <div className="container">
-          <Link to="/createRole" className="btn btn-dark" style={{width:'200px'}}>
-            Create Role
+    <div  className="container">
+          <Link to="/createUserRole" className="btn btn-dark" style={{width:'200px'}}>
+            Create User Role
           </Link>
-        <Table onEdit={handleOnEdit} data={data.roles} onDelete={handleOnDelete}/>
+        <Table disableActions onEdit={handleOnEdit} data={data.rolesMapping} onDelete={handleOnDelete}/>
         
       </div>
   );

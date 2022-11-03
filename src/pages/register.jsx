@@ -19,7 +19,6 @@ const Register = () => {
   const [submitRegister] = useMutation(createUser);
 
   const fromUrl = _get(location, "state.from.pathname");
-  console.log("location => ", location);
 
   const goToLogin = (e) => {
     e.preventDefault();

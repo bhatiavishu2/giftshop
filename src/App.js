@@ -33,11 +33,12 @@ const client = new ApolloClient({
 export const navConfig = [
   {
     id: "home",
+    title: "Home",
     path: "/",
     exact: true,
     component: HomePage,
     layout: CommonLayout,
-    showNav: false
+    showNav: true
   },
   {
     id: "checkout",

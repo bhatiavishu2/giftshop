@@ -2,12 +2,14 @@ import React, {  useContext } from "react";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Link } from "react-router-dom";
-import { AuthStateContext } from "contexts/auth";
+import { Link, useHistory } from "react-router-dom";
+import { AuthStateContext,signOut, AuthDispatchContext } from "contexts/auth";
 // import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function Header({navConfig}) {
     const authState = useContext(AuthStateContext);
+    const dispatch = useContext(AuthDispatchContext)
+    const history = useHistory();
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -34,12 +36,16 @@ function Header({navConfig}) {
               </NavDropdown.Item>
             </NavDropdown> */}
           </Nav>
-          {/* <Nav>
-            <Nav.Link href="#deets">More deets</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-              Dank memes
-            </Nav.Link>
-          </Nav> */}
+          <Nav>
+          {!authState.user && <Link  className="nav-link" to='/auth'> <img width="35" src="/login.png" alt="login" title="login" /></Link>}
+          {authState.user && <a  className="nav-link" onClick={(e)=>{
+            e.preventDefault()
+           signOut(dispatch)
+            history.push('/')
+            window.location.reload()
+          }}> <img title="logout" width="35" src="/logout.png" alt="logout" /></a>}
+           
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>

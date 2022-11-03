@@ -52,19 +52,29 @@
     padding: 24px;
     background: $gray-medium-bg;
     border-radius: 0 0 4px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     .product-price {
-      font-size: 18px;
+      font-size: 14px;
     }
     .product-price {
       color: $primary-green;
       font-weight: bold;
-      font-size: 24px;
+      font-size: 20px;
       float: right;
       &:before {
         content: "₹ ";
       }
+      display: flex;
+    align-items: center;
+    justify-content: space-between;
+    }
+    .shipping-charges{
+      font-size: 10px;
     }
   }
+  
   .quick-view-image {
     img {
       width: 100%;

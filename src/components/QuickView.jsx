@@ -58,7 +58,8 @@ const QuickView = (props) => {
             </div>
             <div className="quick-view-details">
               <span className="product-name">{props.product.name}</span>
-              {props.product.price && <span className="product-price">{props.product.price}</span>}
+              {props.product.price && <span className="product-price">{Number(props.product.price) + Number(props.product.shippingCharges)}</span>}
+              
             </div>
           </div>
         </div>

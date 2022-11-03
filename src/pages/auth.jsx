@@ -23,7 +23,7 @@ const AuthPage = () => {
     { loading, data }
   ] = useLazyQuery(context);
   const fromUrl = _get(location, "state.from.pathname");
-  console.log("location => ", location);
+
   const goToForgotPassword = (e) => {
     e.preventDefault();
   };
@@ -46,6 +46,7 @@ const AuthPage = () => {
     } else {
       history.push("/");
     }
+    window.location.reload()
   };
 
   return (

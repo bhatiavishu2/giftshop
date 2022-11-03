@@ -19,6 +19,8 @@ import SubCategoryPage from "pages/createSubCategory";
 import PermissionPage from "pages/permissions";
 import CreatePermissionPage from "pages/createPermission";
 import EditPermissionPage from "pages/editPermission";
+import CreateRolePage from "pages/createRole";
+import EditRolePage from "pages/editRole";
 import RolePage from "pages/roles";
 import EditCategoryPage from "pages/editcategory";
 import EditProductPage from "pages/editproduct";
@@ -108,7 +110,8 @@ export const navConfig = [
     component: EditCategoryPage,
     layout: CommonLayout,
     showNav: false,
-    isPrivate: true
+    isPrivate: true,
+    permissions: [Permissions.CREATE_CATEGORY]
   },
   {
     id: "editProduct",
@@ -116,17 +119,19 @@ export const navConfig = [
     component: EditProductPage,
     layout: CommonLayout,
     showNav: false,
-    isPrivate: true
+    isPrivate: true,
+    permissions: [Permissions.CREATE_PRODUCT]
   },
   {
     id: "createRole",
     title: "Create Role",
     path: "/createRole",
-    component: RolePage,
+    component: CreateRolePage,
     layout: CommonLayout,
-
+    permissions: [Permissions.CREATE_PRODUCT],
     showNav: false,
-    isPrivate: true
+    isPrivate: true,
+    permissions: [Permissions.CREATE_ROLE]
   },
   {
     id: "roles",
@@ -134,9 +139,18 @@ export const navConfig = [
     path: "/roles",
     component: RolePage,
     layout: CommonLayout,
-
     showNav: true,
-    isPrivate: true
+    isPrivate: true,
+    permissions: [Permissions.CREATE_ROLE]
+  },
+  {
+    id: "editRole",
+    path: "/editRole/:id",
+    component: EditRolePage,
+    layout: CommonLayout,
+    showNav: false,
+    isPrivate: true,
+    permissions: [Permissions.CREATE_ROLE]
   },
   {
     id: "permissions",
@@ -145,7 +159,8 @@ export const navConfig = [
     component: PermissionPage,
     layout: CommonLayout,
     showNav: true,
-    isPrivate: true
+    isPrivate: true,
+    permissions: [Permissions.CREATE_PERMISSION]
   },
   {
     id: "createPermission",
@@ -153,7 +168,7 @@ export const navConfig = [
     path: "/createPermission",
     component: CreatePermissionPage,
     layout: CommonLayout,
-    // permissions: [Permissions.CREATE_PERMISSION],
+    permissions: [Permissions.CREATE_PERMISSION],
     showNav: false,
     isPrivate: true
   },
@@ -161,6 +176,7 @@ export const navConfig = [
     id: "editPermission",
     path: "/editPermission/:id",
     component: EditPermissionPage,
+    permissions: [Permissions.CREATE_PERMISSION],
     layout: CommonLayout,
     showNav: false,
     isPrivate: true

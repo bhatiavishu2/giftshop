@@ -2,9 +2,11 @@ import React, { useEffect, useContext, useState } from "react";
 import Table from "components/core/Table"
 import {  useQuery,useMutation } from '@apollo/client';
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import {
   getRoles,
+  deleteRole
 } from "graphql/roles";
 import { CommonStateContext } from "contexts/common";
 
@@ -16,7 +18,7 @@ const Roles = () => {
     get: (searchParams, prop) => searchParams.get(prop),
   });
   useEffect(()=>{refetch()},[])
-  // const [deleteItem] = useMutation(deleteProduct);
+  const [deleteItem] = useMutation(deleteRole);
   const [previewData, setPreviewData] = useState(null)
   const [modalActive, setModalActive] = useState(false)
   const { products} = data ;
@@ -42,13 +44,13 @@ const Roles = () => {
     setModalActive(false);
   }
   const handleOnDelete = async (data) =>{
-    // await deleteItem({ variables:
-    //   {id:data.id}
-    // })
+    await deleteItem({ variables:
+      {id:data.id}
+    })
     await refetch()
   }
   const handleOnEdit = (data) => {
-    history.push(`/editProduct/${data.id}`);
+    history.push(`/editRole/${data.id}`);
   }
 
   if (isLoading) {
@@ -59,8 +61,11 @@ const Roles = () => {
     );
   }
   return (
-    <div>
-        <Table data={data.roles}/>
+    <div style={{display:'flex', flexDirection:'column', alignItems: 'center'}}>
+          <Link to="/createRole" className="btn btn-dark" style={{width:'200px'}}>
+            Create Role
+          </Link>
+        <Table onEdit={handleOnEdit} data={data.roles} onDelete={handleOnDelete}/>
         
       </div>
   );

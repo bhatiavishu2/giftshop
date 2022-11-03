@@ -20,3 +20,28 @@ export const getRoles = gql`
     }
   }
 `;
+
+export const getRoleById = gql`
+  query role($id: ID!) {
+    role(id: $id) {
+      id
+      name
+      permissionsDetails {
+        name
+        id
+      }
+    }
+  }
+`;
+
+export const deleteRole = gql`
+  mutation deleteRole($id: ID!) {
+    deleteRole(id: $id)
+  }
+`;
+
+export const updateRole = gql`
+  mutation editRole($name: String!, $permissions: [String], $id: ID!) {
+    editRole(id: $id, name: $name, permissions: $permissions)
+  }
+`;

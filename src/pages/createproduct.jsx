@@ -33,6 +33,7 @@ const CreateProduct = () => {
         category: [],
         subCategory:"",
         shippingCharges:"",
+        localShippingCharges:"",
         images:[],
         productDescription:"",
         file:[]
@@ -74,6 +75,12 @@ const CreateProduct = () => {
             name="shippingCharges"
             type="text"
             placeholder="Shipping Charges"
+            component={Input}
+          />
+           <Field
+            name="localShippingCharges"
+            type="text"
+            placeholder="Local Shipping Charges"
             component={Input}
           />
           <Field

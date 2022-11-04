@@ -11,6 +11,7 @@ export const getProducts = gql`
       productDescription
       subCategory
       shippingCharges
+      localShippingCharges
       subCategoryDetails {
         id
         name
@@ -35,6 +36,7 @@ export const getProductById = gql`
       productDescription
       subCategory
       shippingCharges
+      localShippingCharges
       subCategoryDetails {
         id
         name
@@ -64,6 +66,7 @@ export const updateProduct = gql`
     $wholeSalePrice: String!
     $productDescription: String!
     $shippingCharges: String!
+    $localShippingCharges: String
   ) {
     editProduct(
       id: $id
@@ -74,6 +77,7 @@ export const updateProduct = gql`
       wholeSalePrice: $wholeSalePrice
       productDescription: $productDescription
       shippingCharges: $shippingCharges
+      localShippingCharges: $localShippingCharges
     )
   }
 `;
@@ -87,6 +91,7 @@ export const createProduct = gql`
     $wholeSalePrice: String!
     $productDescription: String!
     $shippingCharges: String!
+    $localShippingCharges: String
   ) {
     createProduct(
       name: $name
@@ -96,6 +101,7 @@ export const createProduct = gql`
       wholeSalePrice: $wholeSalePrice
       productDescription: $productDescription
       shippingCharges: $shippingCharges
+      localShippingCharges: $localShippingCharges
     ) {
       id
       name
@@ -105,6 +111,7 @@ export const createProduct = gql`
       subCategory
       productDescription
       shippingCharges
+      localShippingCharges
     }
   }
 `;

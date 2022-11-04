@@ -41,6 +41,7 @@ const EditProduct = ({match}) => {
         category: "",
         subCategory:"",
         shippingCharges:"",
+        localShippingCharges:"",
         images:[],
         productDescription:"",
         file:[],
@@ -85,6 +86,12 @@ const EditProduct = ({match}) => {
             name="shippingCharges"
             type="text"
             placeholder="Shipping Charges"
+            component={Input}
+          />
+            <Field
+            name="localShippingCharges"
+            type="text"
+            placeholder="Local Shipping Charges"
             component={Input}
           />
           <Field

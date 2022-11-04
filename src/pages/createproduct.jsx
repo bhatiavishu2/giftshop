@@ -71,18 +71,19 @@ const CreateProduct = () => {
             placeholder="Whole Sale Price"
             component={Input}
           />
-            <Field
-            name="shippingCharges"
-            type="text"
-            placeholder="Shipping Charges"
-            component={Input}
-          />
            <Field
             name="localShippingCharges"
             type="text"
             placeholder="Local Shipping Charges"
             component={Input}
           />
+            <Field
+            name="shippingCharges"
+            type="text"
+            placeholder="Shipping Charges"
+            component={Input}
+          />
+          
           <Field
             name="productDescription"
             type="text"

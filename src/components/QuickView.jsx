@@ -1,7 +1,7 @@
 import React, { useRef, useEffect,useContext } from "react";
 import { findDOMNode } from "react-dom";
 import { AuthStateContext } from "contexts/auth";
-import { imagesUrl } from "../constants";
+import {getMedia} from 'utils'
 import { Carousel } from "react-responsive-carousel";
 
 const QuickView = (props) => {
@@ -34,7 +34,7 @@ const QuickView = (props) => {
  const handleClose = () => {
     props.closeModal();
   }
-
+  
   const {categoryImage, images} = props.product
     return (
       <div
@@ -53,7 +53,7 @@ const QuickView = (props) => {
           <div className="quick-view">
             <div className="quick-view-image">
       <Carousel showArrows={false} infiniteLoop showThumbs={false} showStatus={true} autoFocus={false} >
-              {images.map((image,index)=><img key={index} src={`${imagesUrl}/${image}`} alt={props.product.name}  />)}
+              {images.map((image,index)=>getMedia({image,index, autoPlay:true}))}
             </Carousel>
               {props.product.productDescription &&<p className="product-description" dangerouslySetInnerHTML={{__html:props.product.productDescription}}></p>}
             </div>

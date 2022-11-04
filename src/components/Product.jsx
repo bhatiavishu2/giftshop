@@ -5,6 +5,7 @@ import { imagesUrl} from "../constants";
 import { confirmAlert } from 'react-confirm-alert';
 import {Permissions} from '../constants/common'
 import ReactWhatsapp from 'react-whatsapp';
+import {getMedia}from 'utils'
 
 const ProductCard = ({ data, onPreview , onClick, onDelete, onEdit}) => {
   const [isAdded, setIsAdded] = useState(false);
@@ -25,7 +26,7 @@ const ProductCard = ({ data, onPreview , onClick, onDelete, onEdit}) => {
     <div className={`product ${onClick?'category':''}`} onClick={()=>onClick && onClick(data)}>
       <div>
       <div className="product-image">
-        <img src={`${imagesUrl}/${categoryImage || (images && images[0])}`} alt={name} onClick={()=>onPreview && onPreview(data)} />
+      {getMedia({image: categoryImage || (images && images[0]), index:1, onPreview, data,autoPlay:false})}
       </div>
       {name && <h4 className="product-name">{name}</h4>}
     <div> {price && <p className="product-price">{authState.hasPermissions([Permissions.RESELLER])?  wholeSalePrice:price}</p>}

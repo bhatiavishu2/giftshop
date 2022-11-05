@@ -34,7 +34,7 @@ const Header = (props) => {
           <Link to="/">
             <img
               className="logo"
-              src="/logo.webp"
+              src="/logo.png"
               alt="MB Group"
             />
           </Link>

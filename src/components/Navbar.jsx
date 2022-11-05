@@ -15,9 +15,9 @@ function Header({navConfig}) {
       <Container>
         <Navbar.Brand>  <Link className="navbar-brand" to="/"> <img
               className="logo"
-              src="/logo.webp"
+              src="/logo.png"
               alt="MB Group"
-              width="35"
+              width="75"
             /></Link></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">

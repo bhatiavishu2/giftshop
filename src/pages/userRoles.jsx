@@ -65,7 +65,7 @@ const Roles = () => {
           <Link to="/createUserRole" className="btn btn-dark" style={{width:'200px'}}>
             Create User Role
           </Link>
-        <Table disableActions onEdit={handleOnEdit} data={data.rolesMapping} onDelete={handleOnDelete}/>
+        <Table disableActions onEdit={handleOnEdit} data={data.rolesMapping.map(rm=> ({...rm,...rm.userDetails}))} onDelete={handleOnDelete}/>
         
       </div>
   );

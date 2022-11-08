@@ -15,7 +15,6 @@ export const getRolesMapping = gql`
       userId
       roleIds
       userDetails {
-        id
         phone
         name
       }

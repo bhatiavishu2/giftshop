@@ -5,7 +5,7 @@ function ResponsiveTable({ data, onEdit, onDelete, disableActions}) {
   const keys = data[0];
   const { __typename, ...restKeys } = keys;
   const getColumnValue = (item, key) =>{
-  if(typeof item[key] === 'string'){
+  if(!item[key] || typeof item[key] === 'string'){
     return item[key]
   } else if(Array.isArray(item[key])){
     return typeof item[key][0] === 'string'? item[key].join(' , '): item[key].map(item => item.name).join(' , ')

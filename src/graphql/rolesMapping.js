@@ -17,6 +17,8 @@ export const getRolesMapping = gql`
       userDetails {
         phone
         name
+        address
+        companyName
       }
       roleDetails {
         id

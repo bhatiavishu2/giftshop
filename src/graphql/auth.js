@@ -26,12 +26,44 @@ export const context = gql`
 `;
 
 export const createUser = gql`
-  mutation createUser($phone: String!, $name: String!, $password: String!) {
-    createUser(phone: $phone, name: $name, password: $password) {
+  mutation createUser(
+    $phone: String!
+    $name: String!
+    $password: String!
+    $address: String
+    $companyName: String
+  ) {
+    createUser(
+      phone: $phone
+      name: $name
+      password: $password
+      address: $address
+      companyName: $companyName
+    ) {
       id
       phone
       name
+      companyName
+      address
     }
+  }
+`;
+
+export const updateUser = gql`
+  mutation editUser(
+    $phone: String!
+    $name: String!
+    $address: String
+    $companyName: String
+    $id: ID!
+  ) {
+    editUser(
+      id: $id
+      phone: $phone
+      name: $name
+      address: $address
+      companyName: $companyName
+    )
   }
 `;
 
@@ -41,6 +73,19 @@ export const getUsers = gql`
       id
       phone
       name
+      companyName
+      address
+    }
+  }
+`;
+export const getUserById = gql`
+  query user($id: ID!) {
+    user(id: $id) {
+      id
+      phone
+      name
+      companyName
+      address
     }
   }
 `;

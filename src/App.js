@@ -14,6 +14,7 @@ import ProductPage from "pages/products";
 import RegisterPage from "pages/register";
 import CheckoutPage from "pages/checkout";
 import CreateProductPage from "pages/createproduct";
+import EditProfilePage from "pages/editProfile";
 import CategoryPage from "pages/createCategory";
 import SubCategoryPage from "pages/createSubCategory";
 import PermissionPage from "pages/permissions";
@@ -201,6 +202,15 @@ export const navConfig = [
     showNav: false,
     isPrivate: true,
     permissions: [Permissions.CREATE_USER_ROLE]
+  },
+  {
+    id: "editProfile",
+    title: "Edit Profile",
+    path: "/editProfile",
+    component: EditProfilePage,
+    layout: CommonLayout,
+    showNav: false,
+    isPrivate: true
   }
 ];
 

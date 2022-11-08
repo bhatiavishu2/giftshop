@@ -64,6 +64,12 @@ function Header({ navConfig }) {
               </Link>
             )}
             {authState.user && (
+              <Link className="nav-link" to="/editProfile">
+                {" "}
+                <img width="35" src="/user.png" alt="user" title="edit profile" />
+              </Link>
+            )}
+            {authState.user && (
               <a
                 className="nav-link"
                 onClick={(e) => {

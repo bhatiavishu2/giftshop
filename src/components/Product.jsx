@@ -74,6 +74,7 @@ const ProductCard = ({ data, onPreview , onClick, onDelete, onEdit}) => {
                 style={{margin:'10px', fontSize: '10px'}}
                 href={`${imagesUrl}/${previewFile}`} //"https://api.mbgroup.shop/static/1667891057438-picture.apk"
                 download
+                target={"_blank"} rel="noreferrer"
               >
                 <img src="/download.png" width={35} alt="download"/>Choose your design
               </a>}

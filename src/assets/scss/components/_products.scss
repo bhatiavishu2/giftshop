@@ -48,6 +48,8 @@
       &.category{
         min-height: 200px;
       }
+     
+      
     }
     @media (max-width: 320px) {
       flex-basis: 100%;
@@ -158,6 +160,33 @@
   }
 }
 
+.sub-category-icon{
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  align-items: center;
+  .sub-category-label{
+    display: flex;
+    width: 35px;
+    height: 35px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .sub-category-text{
+    font-size: 12px;
+    max-width: 50px;
+    text-align: center;
+  }
+}
+.total-products{
+  margin: 0 30px;
+    font-style: italic;
+    color: grey;
+}
+.total-products-wrapper{
+  padding:0;
+}
 // Empty states
 .no-results {
   text-align: center;

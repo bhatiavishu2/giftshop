@@ -7,6 +7,7 @@ export const getMedia = ({ image, index, onPreview, data, autoPlay }) => {
         style={{ width: "100%" }}
         autoPlay={autoPlay}
         onClick={() => onPreview && onPreview(data)}
+        controls
       >
         <source src={`${imagesUrl}/${image}`} type="video/mp4" />
         <source src={`${imagesUrl}/${image}`} type="video/ogg" />

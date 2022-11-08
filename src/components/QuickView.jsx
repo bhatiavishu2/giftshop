@@ -36,6 +36,7 @@ const QuickView = (props) => {
   }
   
   const {categoryImage, images} = props.product
+  const uniqueImages = [...new Set(images)]
     return (
       <div
         className={
@@ -53,7 +54,7 @@ const QuickView = (props) => {
           <div className="quick-view">
             <div className="quick-view-image">
       <Carousel showArrows={false} infiniteLoop showThumbs={false} showStatus={true} autoFocus={false} >
-              {images.map((image,index)=>getMedia({image,index, autoPlay:true}))}
+              {uniqueImages.map((image,index)=>getMedia({image,index, autoPlay:false}))}
             </Carousel>
               {props.product.productDescription &&<p className="product-description" dangerouslySetInnerHTML={{__html:props.product.productDescription}}></p>}
             </div>

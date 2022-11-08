@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const getProducts = gql`
-  query products($categoryId: ID!) {
+  query productsAndSubCategories($categoryId: ID!) {
     products: productsByCategory(categoryId: $categoryId) {
       id
       name
@@ -21,6 +21,16 @@ export const getProducts = gql`
           name
           categoryImage
         }
+      }
+    }
+    category(id: $categoryId) {
+      id
+      name
+      categoryImage
+      subCategories {
+        id
+        name
+        category
       }
     }
   }

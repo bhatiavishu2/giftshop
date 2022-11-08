@@ -131,7 +131,7 @@ const EditProduct = ({match}) => {
               setFieldValue("file", event.currentTarget.files);
             }}
           />
-             Preview File:
+             Catelog File:
           <Field
             name="previewFile"
             type="file"

@@ -71,11 +71,11 @@ const ProductCard = ({ data, onPreview , onClick, onDelete, onEdit}) => {
       </div>
       {previewFile && <a
                 className="nav-link"
-                style={{margin:'10px'}}
+                style={{margin:'10px', fontSize: '10px'}}
                 href={`${imagesUrl}/${previewFile}`} //"https://api.mbgroup.shop/static/1667891057438-picture.apk"
                 download
               >
-                <img src="/download.png" width={35} alt="download"/> Catelog
+                <img src="/download.png" width={35} alt="download"/>Choose your design
               </a>}
             
       {onPreview && <ReactWhatsapp className="whatsapp" number={authState.hasPermissions([Permissions.RESELLER, Permissions.SHOPKEEPER])?'+91-9582611877':'+91-9818855029'} message={`${window.location.href}?productId=${data.id}`} ><img src="/whatsapp.png" width="50" alt="whatsapp"/></ReactWhatsapp>}

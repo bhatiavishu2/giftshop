@@ -36,7 +36,8 @@ const CreateProduct = () => {
         localShippingCharges:"",
         images:[],
         productDescription:"",
-        file:[]
+        file:[],
+        previewFile: ""
       }}
       validationSchema={ProductSchema}
       onSubmit={async (values, { resetForm }) => {
@@ -104,6 +105,7 @@ const CreateProduct = () => {
             component={Select}
             options={(values.category|| []).map(c => ({name:c.name, value: c.id, label:c.name}))}
           />
+          Images: 
            <Field
             name="file"
             type="file"
@@ -116,6 +118,17 @@ const CreateProduct = () => {
               setFieldValue("file", event.currentTarget.files);
             }}
           />
+          Preview File:
+          <Field
+            name="previewFile"
+            type="file"
+            value={undefined}
+            placeholder="Images"
+            component={Input}
+            onChange={(event) => {
+              setFieldValue("previewFile", event.currentTarget.files);
+            }}
+          />
            
            <button disabled={values.file.length === 0 || values.images.length !== 0} className="auth-button block" onClick={async (e) => {
               e.preventDefault()
@@ -125,6 +138,15 @@ const CreateProduct = () => {
              setFieldValue("images", files);
             }}>
             Upload Image
+          </button>
+          <button disabled={!values.previewFile} className="auth-button block" onClick={async (e) => {
+              e.preventDefault()
+              e.stopPropagation();
+             const result =  await uploadImages(values.previewFile);
+            const {data:{files = [ ]}} = await result.json()
+             setFieldValue("previewFile", files[0]);
+            }}>
+            Upload Preview File
           </button>
           <button className="auth-button block" disabled={values.images.length === 0} onClick={() => {}}>
             Create Product

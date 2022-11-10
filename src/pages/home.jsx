@@ -57,41 +57,58 @@ const Home = () => {
     history.push(`/editProduct/${data.id}`);
   };
   return (
-    <div>
-      <div>
-        <div className="products-wrapper" >
-          <h3 className="container" style={{textAlign:'center', paddingTop:"20px"}}>Recent Updated Products</h3>
-        <div className=" container products latest-products">
-          {latestProducts &&
-            latestProducts.map((data) => {
-              return (
-                <ProductCard
-                  onEdit={handleProductOnEdit}
-                  onDelete={handleProductOnDelete}
-                  onPreview={onProductPreview}
-                  key={data.id}
-                  data={data}
-                />
-              );
-            })}
+    <div
+   
+    >
+      <div className="container">
+        <div className="products-wrapper"    style={{
+        backgroundImage: "url('/bg.jpeg')",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center center"
+      }}>
+          <h3
+            className="heading"
+            style={{ textAlign: "center", paddingTop: "20px" }}
+          >
+            Recent Updated Products
+          </h3>
+          <div className="products latest-products">
+            {latestProducts &&
+              latestProducts.map((data) => {
+                return (
+                  <ProductCard
+                    onEdit={handleProductOnEdit}
+                    onDelete={handleProductOnDelete}
+                    onPreview={onProductPreview}
+                    key={data.id}
+                    data={data}
+                  />
+                );
+              })}
+          </div>
         </div>
-        </div>
-        <div>
-        <div className=" container products all-categories">
-        <h3 className="container" style={{textAlign:'center', paddingTop:"20px"}}>All Categories</h3>
-          {categories &&
-            categories.map((data) => {
-              return (
-                <ProductCard
-                  onEdit={handleOnEdit}
-                  onDelete={handleOnDelete}
-                  key={data.id}
-                  data={data}
-                  onClick={() => onPreview(data)}
-                />
-              );
-            })}
-        </div>
+        <div className="product-wrapper">
+          <h3
+            className="heading"
+            style={{ textAlign: "center", paddingTop: "20px" }}
+          >
+            All Categories
+          </h3>
+          <div className="products all-categories">
+            {categories &&
+              categories.map((data) => {
+                return (
+                  <ProductCard
+                    onEdit={handleOnEdit}
+                    onDelete={handleOnDelete}
+                    key={data.id}
+                    data={data}
+                    onClick={() => onPreview(data)}
+                  />
+                );
+              })}
+          </div>
         </div>
       </div>
       {previewData && (

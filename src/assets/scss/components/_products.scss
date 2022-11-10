@@ -9,6 +9,13 @@
     padding-top: 32px;
   }
 }
+.heading{
+  max-width: 960px;
+  margin: auto;
+  text-align: center;
+    padding: 20px;
+    background-image: linear-gradient(to right, #a575d9 ,#5cbdc5);
+}
 .products {
   display: flex;
   display: -webkit-flex;

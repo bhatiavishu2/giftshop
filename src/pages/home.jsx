@@ -13,7 +13,7 @@ const Home = () => {
     loading: latestProductLoading,
     data: { latestProducts = [] } = {},
     refetch
-  } = useQuery(getLatestProducts, { variables: { limit: 8 } });
+  } = useQuery(getLatestProducts, { variables: { limit: 4 } });
   const [deleteItem] = useMutation(deleteCategory);
   const [deleteProductItem] = useMutation(deleteProduct);
   const [previewData, setPreviewData] = useState(null);
@@ -59,8 +59,8 @@ const Home = () => {
   return (
     <div>
       <div>
-        <div className="products-wrapper" style={{    background: '#b68200'}}>
-          <h3 className="container" style={{textAlign:'center', paddingTop:"20px"}}>Recent Products</h3>
+        <div className="products-wrapper" >
+          <h3 className="container" style={{textAlign:'center', paddingTop:"20px"}}>Recent Updated Products</h3>
         <div className=" container products latest-products">
           {latestProducts &&
             latestProducts.map((data) => {

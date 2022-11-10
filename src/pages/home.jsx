@@ -59,6 +59,7 @@ const Home = () => {
   };
   
   return (
+    <Parallax bgImage={'https://images.pexels.com/photos/4197491/pexels-photo-4197491.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'} strength={500}>
     <div
     style={{
       backgroundImage: "url('/bg.jpeg')",
@@ -76,7 +77,7 @@ const Home = () => {
           >
             Recent Updated Products
           </h3>
-          <Parallax bgImage={'/recent.jpeg'} strength={500}>
+          {/* <Parallax bgImage={'/recent.jpeg'} strength={500}> */}
           <div  className="products latest-products">
             {latestProducts &&
               latestProducts.map((data) => {
@@ -91,7 +92,7 @@ const Home = () => {
                 );
               })}
           </div>
-          </Parallax>
+            {/* </Parallax> */}
         </div>
       
         <div className="product-wrapper">
@@ -101,6 +102,7 @@ const Home = () => {
           >
             All Categories
           </h3>
+         
           <div className="products all-categories">
             {categories &&
               categories.map((data) => {
@@ -115,6 +117,7 @@ const Home = () => {
                 );
               })}
           </div>
+       
         </div>
       </div>
       {previewData && (
@@ -125,6 +128,7 @@ const Home = () => {
         />
       )}
     </div>
+    </Parallax>
   );
 };
 

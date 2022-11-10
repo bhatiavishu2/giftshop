@@ -79,7 +79,7 @@ const ProductCard = ({ data, onPreview , onClick, onDelete, onEdit}) => {
                 <img src="/download.png" width={35} alt="download"/>Choose your design
               </a>}
             
-      {onPreview && <ReactWhatsapp className="whatsapp" number={authState.hasPermissions([Permissions.RESELLER, Permissions.SHOPKEEPER])?'+91-9582611877':'+91-9818855029'} message={`${window.location.href}?productId=${data.id}`} ><img src="/whatsapp.png" width="50" alt="whatsapp"/></ReactWhatsapp>}
+      {onPreview && <ReactWhatsapp className="whatsapp" number={authState.hasPermissions([Permissions.RESELLER, Permissions.SHOPKEEPER])?'+91-9582611877':'+91-9818855029'} message={`${window.location.origin}/products/${data.subCategoryDetails.category}?productId=${data.id}`} ><img src="/whatsapp.png" width="50" alt="whatsapp"/></ReactWhatsapp>}
     </div>
   );
 };

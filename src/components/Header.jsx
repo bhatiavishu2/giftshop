@@ -76,7 +76,7 @@ const Header = (props) => {
           </form>
         </div>
 
-     {false &&   <div className="cart">
+     {  <div className="cart">
           <div className="cart-info">
             <table>
               <tbody>

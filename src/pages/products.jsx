@@ -73,7 +73,7 @@ const Product = ({ match }) => {
       </div>
     );
   }
-  console.log(category.subCategories);
+
   return (
     <div className="products-wrapper container">
       <div className=" products">

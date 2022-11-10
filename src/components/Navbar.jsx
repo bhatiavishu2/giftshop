@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -6,8 +6,10 @@ import { Link, useHistory } from "react-router-dom";
 import { imagesUrl, apkName } from "../constants";
 import { AuthStateContext, signOut, AuthDispatchContext } from "contexts/auth";
 // import NavDropdown from 'react-bootstrap/NavDropdown';
+import Notification from "./Notification";
 
 function Header({ navConfig }) {
+  const [isOpen, setOpen] = useState(false);
   const authState = useContext(AuthStateContext);
   const dispatch = useContext(AuthDispatchContext);
   const history = useHistory();
@@ -21,6 +23,7 @@ function Header({ navConfig }) {
             <img className="logo" src="/logo.png" alt="MB Group" width="75" />
           </Link>
         </Navbar.Brand>
+
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
@@ -57,6 +60,28 @@ function Header({ navConfig }) {
                 Download Android App
               </a>
             )}
+
+            <div style={{ position: "relative" }}>
+              {" "}
+              <a
+                href=""
+                className="nav-link"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOpen(!isOpen);
+                }}
+              >
+                {" "}
+                <img
+                  width="35"
+                  src="/bell.png"
+                  alt="user"
+                  title="edit profile"
+                />
+              </a>
+              {isOpen && <Notification />}
+            </div>
+
             {!authState.user && (
               <Link className="nav-link" to="/auth">
                 {" "}
@@ -66,7 +91,12 @@ function Header({ navConfig }) {
             {authState.user && (
               <Link className="nav-link" to="/editProfile">
                 {" "}
-                <img width="35" src="/user.png" alt="user" title="edit profile" />
+                <img
+                  width="35"
+                  src="/user.png"
+                  alt="user"
+                  title="edit profile"
+                />
               </Link>
             )}
             {authState.user && (

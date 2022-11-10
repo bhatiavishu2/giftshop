@@ -138,3 +138,30 @@ export const deleteProduct = gql`
     deleteProduct(id: $id)
   }
 `;
+
+export const getLatestProducts = gql`
+  query latestProducts($limit: Int!) {
+   latestProducts(limit: $limit) {
+      id
+      name
+      price
+      wholeSalePrice
+      images
+      productDescription
+      subCategory
+      previewFile
+      shippingCharges
+      localShippingCharges
+      subCategoryDetails {
+        id
+        name
+        category
+        categoryDetails {
+          id
+          name
+          categoryImage
+        }
+      }
+    }
+  }
+`;

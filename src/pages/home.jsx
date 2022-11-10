@@ -58,15 +58,15 @@ const Home = () => {
   };
   return (
     <div
-   
+    style={{
+      backgroundImage: "url('/bg.png')",
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center center"
+    }}
     >
       <div className="container">
-        <div className="products-wrapper"    style={{
-        backgroundImage: "url('/bg.jpeg')",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center center"
-      }}>
+        <div className="products-wrapper"    >
           <h3
             className="heading"
             style={{ textAlign: "center", paddingTop: "20px" }}

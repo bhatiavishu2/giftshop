@@ -30,7 +30,8 @@ const CartPreview = ({handleClose}) => {
 
   return (
     <div className={classNames("cart-preview", { active: true })}>
-      <h5 style={{ textAlign: "center", paddingTop: "15px" }}>
+      <h5 style={{ textAlign: "center", padding: "15px", 
+    backgroundImage: 'linear-gradient(to right, #a575d9, #5cbdc5)'}}>
         Recent Updated Products
       </h5>
       <button

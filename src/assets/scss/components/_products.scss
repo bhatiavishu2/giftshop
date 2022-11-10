@@ -10,7 +10,6 @@
   }
 }
 .heading{
-  max-width: 960px;
   margin: auto;
   text-align: center;
     padding: 20px;
@@ -22,18 +21,17 @@
   flex-wrap: wrap;
   -webkit-flex-wrap: wrap;
   padding: 16px;
-  max-width: 960px;
   margin: 0 auto;
   @media (max-width: 768px) {
     padding: 8px;
   }
   .product {
     min-height: 355px;
-    flex-basis: calc(25% - 32px);
+    flex-basis: calc(20% - 32px);
     &.category{
       min-height: 250px;
     }
-    -webkit-flex-basis: calc(25% - 32px);
+    -webkit-flex-basis: calc(20% - 32px);
     @media (max-width: 768px) {
       flex-basis: calc(33% - 16px);
       -webkit-flex-basis: calc(33% - 16px);

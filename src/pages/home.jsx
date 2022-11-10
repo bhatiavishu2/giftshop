@@ -13,7 +13,7 @@ const Home = () => {
     loading: latestProductLoading,
     data: { latestProducts = [] } = {},
     refetch
-  } = useQuery(getLatestProducts, { variables: { limit: 4 } });
+  } = useQuery(getLatestProducts, { variables: { limit: 5 } });
   const [deleteItem] = useMutation(deleteCategory);
   const [deleteProductItem] = useMutation(deleteProduct);
   const [previewData, setPreviewData] = useState(null);
@@ -59,7 +59,7 @@ const Home = () => {
   return (
     <div
     style={{
-      backgroundImage: "url('/bg.png')",
+      backgroundImage: "url('/bg.jpeg')",
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center center"

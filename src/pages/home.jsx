@@ -73,7 +73,7 @@ const Home = () => {
           >
             Recent Updated Products
           </h3>
-          <div className="products latest-products">
+          <div style={{background: 'light-pink'}} className="products latest-products">
             {latestProducts &&
               latestProducts.map((data) => {
                 return (

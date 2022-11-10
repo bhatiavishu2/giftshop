@@ -46,6 +46,7 @@ const EditProduct = ({match}) => {
         productDescription:"",
         file:[],
         previewFile: "",
+        videoUrl:"",
         ...restProductData,
         category: subCategoryDetails.categoryDetails
       }}
@@ -101,6 +102,12 @@ const EditProduct = ({match}) => {
             type="text"
             placeholder="Product Description"
             component={Textarea}
+          />
+            <Field
+            name="videoUrl"
+            type="text"
+            placeholder="Video URL"
+            component={Input}
           />
             <Field
             name="category"

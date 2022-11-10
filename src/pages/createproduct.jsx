@@ -37,7 +37,8 @@ const CreateProduct = () => {
         images:[],
         productDescription:"",
         file:[],
-        previewFile: ""
+        previewFile: "",
+        videoUrl: ""
       }}
       validationSchema={ProductSchema}
       onSubmit={async (values, { resetForm }) => {
@@ -90,6 +91,12 @@ const CreateProduct = () => {
             type="text"
             placeholder="Product Description"
             component={Textarea}
+          />
+           <Field
+            name="videoUrl"
+            type="text"
+            placeholder="Video URL"
+            component={Input}
           />
             <Field
             name="category"

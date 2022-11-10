@@ -56,6 +56,7 @@ const QuickView = (props) => {
       <Carousel showArrows={false} infiniteLoop showThumbs={false} showStatus={true} autoFocus={false} >
               {uniqueImages.map((image,index)=>getMedia({image,index, autoPlay:false}))}
             </Carousel>
+              {props.product.videoUrl && <a className="product-description" href={props.product.videoUrl}>Click here to see video</a>}
               {props.product.productDescription &&<p className="product-description" dangerouslySetInnerHTML={{__html:props.product.productDescription}}></p>}
             </div>
             <div className="quick-view-details">

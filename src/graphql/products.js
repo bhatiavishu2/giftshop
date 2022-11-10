@@ -12,6 +12,7 @@ export const getProducts = gql`
       subCategory
       previewFile
       shippingCharges
+      videoUrl
       localShippingCharges
       subCategoryDetails {
         id
@@ -48,6 +49,7 @@ export const getProductById = gql`
       subCategory
       shippingCharges
       localShippingCharges
+      videoUrl
       previewFile
       subCategoryDetails {
         id
@@ -80,6 +82,7 @@ export const updateProduct = gql`
     $shippingCharges: String!
     $localShippingCharges: String
     $previewFile: String
+    $videoUrl: String
   ) {
     editProduct(
       id: $id
@@ -92,6 +95,7 @@ export const updateProduct = gql`
       shippingCharges: $shippingCharges
       localShippingCharges: $localShippingCharges
       previewFile: $previewFile
+      videoUrl: $videoUrl
     )
   }
 `;
@@ -107,6 +111,7 @@ export const createProduct = gql`
     $shippingCharges: String!
     $localShippingCharges: String
     $previewFile: String
+    $videoUrl: String
   ) {
     createProduct(
       name: $name
@@ -118,6 +123,7 @@ export const createProduct = gql`
       shippingCharges: $shippingCharges
       localShippingCharges: $localShippingCharges
       previewFile: $previewFile
+      videoUrl: $videoUrl
     ) {
       id
       name
@@ -129,6 +135,7 @@ export const createProduct = gql`
       shippingCharges
       localShippingCharges
       previewFile
+      videoUrl
     }
   }
 `;
@@ -152,6 +159,7 @@ export const getLatestProducts = gql`
       previewFile
       shippingCharges
       localShippingCharges
+      videoUrl
       subCategoryDetails {
         id
         name

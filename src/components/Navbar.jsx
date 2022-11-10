@@ -79,7 +79,7 @@ function Header({ navConfig }) {
                   title="edit profile"
                 />
               </a>
-              {isOpen && <Notification />}
+              {isOpen && <Notification handleClose={()=> setOpen(false)}/>}
             </div>
 
             {!authState.user && (

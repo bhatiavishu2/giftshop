@@ -8,7 +8,7 @@ import { imagesUrl } from "../constants";
 import { Link } from "react-router-dom";
 import { Permissions } from "../constants/common";
 
-const CartPreview = () => {
+const CartPreview = ({handleClose}) => {
   const { loading, data: { latestProducts } = {}, refetch } = useQuery(
     getLatestProducts,
     { variables: { limit: 8 } }
@@ -33,6 +33,13 @@ const CartPreview = () => {
       <h5 style={{ textAlign: "center", paddingTop: "15px" }}>
         Recent Products
       </h5>
+      <button
+            type="button"
+            className="close"
+            onClick={handleClose.bind(this)}
+          >
+            &times;
+          </button>
       <ul className="cart-items">
         {latestProducts.map((product) => {
           return (

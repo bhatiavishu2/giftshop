@@ -3,7 +3,7 @@ import ProductCard from "components/Product";
 import { useQuery, useMutation } from "@apollo/client";
 import QuickView from "components/QuickView";
 import { useHistory } from "react-router-dom";
-import { getLatestProducts } from "graphql/products";
+import { getLatestProducts, deleteProduct } from "graphql/products";
 import { getCategories, deleteCategory } from "graphql/category";
 
 const Home = () => {
@@ -15,6 +15,7 @@ const Home = () => {
     refetch
   } = useQuery(getLatestProducts, { variables: { limit: 8 } });
   const [deleteItem] = useMutation(deleteCategory);
+  const [deleteProductItem] = useMutation(deleteProduct);
   const [previewData, setPreviewData] = useState(null);
   const [modalActive, setModalActive] = useState(false);
   useEffect(() => {
@@ -49,7 +50,7 @@ const Home = () => {
     setModalActive(false);
   };
   const handleProductOnDelete = async (data) => {
-    // await deleteItem({ variables: { id: data.id } });
+    await deleteProductItem({ variables: { id: data.id } });
     await refetch();
   };
   const handleProductOnEdit = (data) => {

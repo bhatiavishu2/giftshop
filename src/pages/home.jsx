@@ -5,6 +5,7 @@ import QuickView from "components/QuickView";
 import { useHistory } from "react-router-dom";
 import { getLatestProducts, deleteProduct } from "graphql/products";
 import { getCategories, deleteCategory } from "graphql/category";
+import { Parallax, Background } from "react-parallax";
 
 const Home = () => {
   const history = useHistory();
@@ -56,6 +57,7 @@ const Home = () => {
   const handleProductOnEdit = (data) => {
     history.push(`/editProduct/${data.id}`);
   };
+  
   return (
     <div
     style={{
@@ -66,6 +68,7 @@ const Home = () => {
     }}
     >
       <div className="container">
+   
         <div className="products-wrapper"    >
           <h3
             className="heading"
@@ -73,7 +76,8 @@ const Home = () => {
           >
             Recent Updated Products
           </h3>
-          <div style={{background: 'light-pink'}} className="products latest-products">
+          <Parallax bgImage={'/recent.jpeg'} strength={500}>
+          <div  className="products latest-products">
             {latestProducts &&
               latestProducts.map((data) => {
                 return (
@@ -87,7 +91,9 @@ const Home = () => {
                 );
               })}
           </div>
+          </Parallax>
         </div>
+      
         <div className="product-wrapper">
           <h3
             className="heading"

@@ -3,7 +3,6 @@ import ProductCard from "components/Product";
 import QuickView from "components/QuickView";
 import { useQuery, useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getProducts, deleteProduct } from "graphql/products";
 import { CommonStateContext } from "contexts/common";
 import { Link } from "react-router-dom";

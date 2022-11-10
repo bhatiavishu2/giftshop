@@ -34,12 +34,12 @@
     -webkit-flex-basis: calc(20% - 32px);
     @media (max-width: 768px) {
       flex-basis: calc(33% - 16px);
-      -webkit-flex-basis: calc(33% - 16px);
+      -webkit-flex-basis: calc(33% - 25px);
       margin: 8px;
     }
     @media (max-width: 480px) {
-      flex-basis: calc(50% - 16px);
-      -webkit-flex-basis: calc(50% - 16px);
+      flex-basis: calc(50% - 25px);
+      -webkit-flex-basis: calc(50% - 25px);
       min-height: 313px;
       display: flex;
       flex-direction: column;

@@ -11,7 +11,7 @@ import { Permissions } from "../constants/common";
 const CartPreview = ({handleClose}) => {
   const { loading, data: { latestProducts } = {}, refetch } = useQuery(
     getLatestProducts,
-    { variables: { limit: 8 } }
+    { variables: { limit: 20 } }
   );
   const authState = useContext(AuthStateContext);
   const history = useHistory();

@@ -39,6 +39,7 @@ export const getHomePageData = gql`
         id
         bannerUrls
         merchantBannerUrls
+        merchantMobileBannerUrls
         mobileBannerUrls
       }
   }

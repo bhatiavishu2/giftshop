@@ -1,10 +1,11 @@
 import { gql } from "@apollo/client";
 export const createBanner = gql`
-  mutation createBanner($bannerUrls: String!, $merchantBannerUrls: String!, $mobileBannerUrls: String!) {
-    createBanner(bannerUrls:$bannerUrls, merchantBannerUrls: $merchantBannerUrls, mobileBannerUrls:$mobileBannerUrls){
+  mutation createBanner($bannerUrls: String!, $merchantBannerUrls: String!, $mobileBannerUrls: String!, $merchantMobileBannerUrls: String!) {
+    createBanner(bannerUrls:$bannerUrls, merchantBannerUrls: $merchantBannerUrls, mobileBannerUrls:$mobileBannerUrls,merchantMobileBannerUrls: $merchantMobileBannerUrls){
         id
         bannerUrls
         merchantBannerUrls
+        merchantMobileBannerUrls
         mobileBannerUrls
     }
   }
@@ -17,6 +18,7 @@ export const getBanner = gql`
       id
       bannerUrls
       merchantBannerUrls
+      merchantMobileBannerUrls
       mobileBannerUrls
     }
   }

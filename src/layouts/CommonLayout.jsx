@@ -10,7 +10,7 @@ const CommonLayout = ({ children }) => {
       <Header navConfig={navConfig}/>
      
       <main style={{minHeight:'75vh'}}> 
-      <Parallax bgImage={'https://images.pexels.com/photos/4197491/pexels-photo-4197491.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'} strength={500}>
+      <Parallax bgImage={'/bg.webp'} strength={500}>
         {children}</Parallax></main>
       
       <Footer />

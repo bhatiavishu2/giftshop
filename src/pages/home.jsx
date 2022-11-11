@@ -10,7 +10,7 @@ import { AuthStateContext } from "contexts/auth";
 import { getHomePageData } from "graphql/home";
 import { imagesUrl } from "../constants";
 import { Carousel } from "react-responsive-carousel";
-import {isMobileAndTablet} from "../utils"
+import { isMobileAndTablet } from "../utils";
 
 const Home = () => {
   const history = useHistory();
@@ -67,17 +67,19 @@ const Home = () => {
   };
   let bannerUrls = banner?.bannerUrls;
   if (
-    !isMobileAndTablet()&& authState.hasPermissions([Permissions.RESELLER, Permissions.SHOPKEEPER])
+    !isMobileAndTablet() &&
+    authState.hasPermissions([Permissions.RESELLER, Permissions.SHOPKEEPER])
   ) {
     bannerUrls = banner?.merchantBannerUrls;
-  } 
-   if (isMobileAndTablet()) {
-    if(
+  }
+  if (isMobileAndTablet()) {
+    if (
       authState.hasPermissions([Permissions.RESELLER, Permissions.SHOPKEEPER])
-    ){
+    ) {
       bannerUrls = banner?.merchantMobileBannerUrls;
+    } else {
+      bannerUrls = banner?.mobileBannerUrls;
     }
-    bannerUrls = banner?.mobileBannerUrls;
   }
   return (
     <div>
@@ -90,7 +92,7 @@ const Home = () => {
         autoPlay
         showIndicators={false}
       >
-        {(bannerUrls || '').split(",").map((url) => (
+        {(bannerUrls || "").split(",").map((url) => (
           <div
             className="banner"
             style={{

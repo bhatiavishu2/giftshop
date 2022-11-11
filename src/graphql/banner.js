@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
 export const createBanner = gql`
-  mutation createBanner($bannerUrl: String) {
-    createBanner(bannerUrl:$bannerUrl){
+  mutation createBanner($bannerUrls: String) {
+    createBanner(bannerUrls:$bannerUrls){
         id
-        bannerUrl
+        bannerUrls
     }
   }
 `;
@@ -13,7 +13,7 @@ export const getBanner = gql`
   query banners($limit: Int) {
     banners(limit:$limit){
       id
-      bannerUrl
+      bannerUrls
     }
   }
 `;

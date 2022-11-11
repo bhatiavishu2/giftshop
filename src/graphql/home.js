@@ -37,7 +37,7 @@ export const getHomePageData = gql`
       }
       banners(limit:$bannerLimit){
         id
-        bannerUrl
+        bannerUrls
       }
   }
 `;

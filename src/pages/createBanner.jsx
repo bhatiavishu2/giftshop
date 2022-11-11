@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import { uploadImages } from "graphql/upload";
 
 const ProductSchema = Yup.object().shape({
-  bannerUrl: Yup.string().required("Banner is required!")
+  bannerUrls: Yup.string().required("Banner is required!")
 });
 
 const CreateProduct = () => {
@@ -18,7 +18,7 @@ const CreateProduct = () => {
   return (
     <Formik
       initialValues={{
-        bannerUrl: "",
+        bannerUrls: "",
         file: []
       }}
       validationSchema={ProductSchema}
@@ -48,7 +48,7 @@ const CreateProduct = () => {
             }}
           />
           <button
-            disabled={values.file.length === 0 || values.bannerUrl.length !== 0}
+            disabled={values.file.length === 0 || values.bannerUrls.length !== 0}
             className="auth-button block"
             onClick={async (e) => {
               e.preventDefault();
@@ -57,7 +57,7 @@ const CreateProduct = () => {
               const {
                 data: { files = [] }
               } = await result.json();
-              setFieldValue("bannerUrl", files[0]);
+              setFieldValue("bannerUrls", files[0]);
             }}
           >
             Upload Banner

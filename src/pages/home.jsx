@@ -66,7 +66,7 @@ const Home = () => {
       <div
         className="banner"
         style={{
-          backgroundImage: `url('${imagesUrl}/${banner.bannerUrl}')`,
+          backgroundImage: `url('${imagesUrl}/${banner?.bannerUrls}')`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center center",

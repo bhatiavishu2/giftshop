@@ -8,7 +8,9 @@ import { useHistory } from "react-router-dom";
 import { uploadImages } from "graphql/upload";
 
 const ProductSchema = Yup.object().shape({
-  bannerUrls: Yup.string().required("Banner is required!")
+  bannerUrls: Yup.string().required("Banners are required!"),
+  merchantBannerUrls: Yup.string().required("Merchant Banners are required!"),
+  mobileBannerUrls: Yup.string().required("Mobile Banners are required!"),
 });
 
 const CreateProduct = () => {
@@ -19,6 +21,8 @@ const CreateProduct = () => {
     <Formik
       initialValues={{
         bannerUrls: "",
+        merchantBannerUrls:"",
+        mobileBannerUrls:"",
         file: []
       }}
       validationSchema={ProductSchema}
@@ -57,10 +61,40 @@ const CreateProduct = () => {
               const {
                 data: { files = [] }
               } = await result.json();
-              setFieldValue("bannerUrls", files[0]);
+              setFieldValue("bannerUrls", files.join(','));
             }}
           >
             Upload Banner
+          </button>
+          <button
+            disabled={values.file.length === 0 || values.mobileBannerUrls.length !== 0}
+            className="auth-button block"
+            onClick={async (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              const result = await uploadImages(values.file);
+              const {
+                data: { files = [] }
+              } = await result.json();
+              setFieldValue("mobileBannerUrls", files.join(','));
+            }}
+          >
+            Upload Mobile Banner
+          </button>
+          <button
+            disabled={values.file.length === 0 || values.merchantBannerUrls.length !== 0}
+            className="auth-button block"
+            onClick={async (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              const result = await uploadImages(values.file);
+              const {
+                data: { files = [] }
+              } = await result.json();
+              setFieldValue("merchantBannerUrls", files.join(','));
+            }}
+          >
+            Upload Merchant Banner
           </button>
           <button className="auth-button block" onClick={() => {}}>
             Create Banner

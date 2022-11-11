@@ -5,11 +5,16 @@ import QuickView from "components/QuickView";
 import { useHistory } from "react-router-dom";
 import { deleteProduct } from "graphql/products";
 import { deleteCategory } from "graphql/category";
+import { Permissions } from "../constants/common";
+import { AuthStateContext } from "contexts/auth";
 import { getHomePageData } from "graphql/home";
 import { imagesUrl } from "../constants";
+import { Carousel } from "react-responsive-carousel";
+import {isMobileAndTablet} from "../utils"
 
 const Home = () => {
   const history = useHistory();
+  const authState = useContext(AuthStateContext);
   const {
     loading,
     data: { categories, latestProducts = [], banners: [banner] = [] } = {},
@@ -60,19 +65,38 @@ const Home = () => {
   const handleProductOnEdit = (data) => {
     history.push(`/editProduct/${data.id}`);
   };
-  console.log(banner);
+  let bannerUrls = banner.bannerUrls;
+  if (
+    authState.hasPermissions([Permissions.RESELLER, Permissions.SHOPKEEPER])
+  ) {
+    bannerUrls = banner.merchantBannerUrls;
+  } else if (isMobileAndTablet()) {
+    bannerUrls = banner.mobileBannerUrls;
+  }
   return (
     <div>
-      <div
-        className="banner"
-        style={{
-          backgroundImage: `url('${imagesUrl}/${banner?.bannerUrls}')`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center center",
-          height: '400px'
-        }}
-      />
+      <Carousel
+        showArrows={false}
+        infiniteLoop
+        showThumbs={false}
+        showStatus={false}
+        autoFocus={false}
+        autoPlay
+        showIndicators={false}
+      >
+        {bannerUrls.split(",").map((url) => (
+          <div
+            className="banner"
+            style={{
+              backgroundImage: `url('${imagesUrl}/${url}')`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center center",
+              height: "400px"
+            }}
+          />
+        ))}
+      </Carousel>
       {/* <img src={`${imagesUrl}/${banner.bannerUrl}`} alt="Banner" /> */}
       <div className="container">
         <div className="products-wrapper">

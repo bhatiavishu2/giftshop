@@ -5,7 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link, useHistory } from "react-router-dom";
 import { imagesUrl, apkName } from "../constants";
 import { AuthStateContext, signOut, AuthDispatchContext } from "contexts/auth";
-// import NavDropdown from 'react-bootstrap/NavDropdown';
+import NavDropdown from "react-bootstrap/NavDropdown";
 import Notification from "./Notification";
 
 function Header({ navConfig }) {
@@ -13,6 +13,9 @@ function Header({ navConfig }) {
   const authState = useContext(AuthStateContext);
   const dispatch = useContext(AuthDispatchContext);
   const history = useHistory();
+  const adminPages = navConfig.filter(
+    (nav) => nav.showInDropdown && authState.hasPermissions(nav.permissions)
+  );
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -38,17 +41,29 @@ function Header({ navConfig }) {
                 )
             )}
 
-            {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown> */}
+            {!!adminPages.length && (
+              <>
+                <NavDropdown title="Admin Pages" id="collasible-nav-dropdown">
+                  {navConfig.map(
+                    (nav) =>
+                      nav.showInDropdown &&
+                      authState.hasPermissions(nav.permissions) && (
+                        <>
+                          <Link
+                            key={nav.id}
+                            className="dropdown-item"
+                            to={nav.path}
+                          >
+                            {" "}
+                            {nav.title}
+                          </Link>
+                          <NavDropdown.Divider key={nav.id} />
+                        </>
+                      )
+                  )}
+                </NavDropdown>
+              </>
+            )}
           </Nav>
           <Nav>
             {authState.user && (
@@ -79,7 +94,7 @@ function Header({ navConfig }) {
                   title="edit profile"
                 />
               </a>
-              {isOpen && <Notification handleClose={()=> setOpen(false)}/>}
+              {isOpen && <Notification handleClose={() => setOpen(false)} />}
             </div>
 
             {!authState.user && (

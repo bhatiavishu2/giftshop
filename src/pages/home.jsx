@@ -3,18 +3,21 @@ import ProductCard from "components/Product";
 import { useQuery, useMutation } from "@apollo/client";
 import QuickView from "components/QuickView";
 import { useHistory } from "react-router-dom";
-import { getLatestProducts, deleteProduct } from "graphql/products";
-import { getCategories, deleteCategory } from "graphql/category";
-import { Parallax, Background } from "react-parallax";
+import { deleteProduct } from "graphql/products";
+import { deleteCategory } from "graphql/category";
+import { getHomePageData } from "graphql/home";
+import { imagesUrl } from "../constants";
 
 const Home = () => {
   const history = useHistory();
-  const { loading, data: { categories } = {} } = useQuery(getCategories);
   const {
-    loading: latestProductLoading,
-    data: { latestProducts = [] } = {},
+    loading,
+    data: { categories, latestProducts = [], banners: [banner] = [] } = {},
     refetch
-  } = useQuery(getLatestProducts, { variables: { limit: 5 } });
+  } = useQuery(getHomePageData, {
+    variables: { latestProductLimit: 5, bannerLimit: 1 }
+  });
+
   const [deleteItem] = useMutation(deleteCategory);
   const [deleteProductItem] = useMutation(deleteProduct);
   const [previewData, setPreviewData] = useState(null);
@@ -35,7 +38,7 @@ const Home = () => {
     history.push(`/categories/${data.id}`);
   };
 
-  if (latestProductLoading || loading) {
+  if (loading) {
     return (
       <div className="products-wrapper">
         <h1>Loading...</h1>
@@ -57,19 +60,22 @@ const Home = () => {
   const handleProductOnEdit = (data) => {
     history.push(`/editProduct/${data.id}`);
   };
-  
+  console.log(banner);
   return (
-    <div
-    style={{
-      backgroundImage: "url('/bg.jpeg')",
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "center center"
-    }}
-    >
+    <div>
+      <div
+        className="banner"
+        style={{
+          backgroundImage: `url('${imagesUrl}/${banner.bannerUrl}')`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center center",
+          height: '400px'
+        }}
+      />
+      {/* <img src={`${imagesUrl}/${banner.bannerUrl}`} alt="Banner" /> */}
       <div className="container">
-   
-        <div className="products-wrapper"    >
+        <div className="products-wrapper">
           <h3
             className="heading"
             style={{ textAlign: "center", paddingTop: "20px" }}
@@ -77,7 +83,7 @@ const Home = () => {
             Recent Updated Products
           </h3>
           {/* <Parallax bgImage={'/recent.jpeg'} strength={500}> */}
-          <div  className="products latest-products">
+          <div className="products latest-products">
             {latestProducts &&
               latestProducts.map((data) => {
                 return (
@@ -91,9 +97,9 @@ const Home = () => {
                 );
               })}
           </div>
-            {/* </Parallax> */}
+          {/* </Parallax> */}
         </div>
-      
+
         <div className="product-wrapper">
           <h3
             className="heading"
@@ -101,7 +107,7 @@ const Home = () => {
           >
             All Categories
           </h3>
-         
+
           <div className="products all-categories">
             {categories &&
               categories.map((data) => {
@@ -116,7 +122,6 @@ const Home = () => {
                 );
               })}
           </div>
-       
         </div>
       </div>
       {previewData && (

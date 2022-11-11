@@ -59,3 +59,5 @@ export const deleteCategory = gql`
     deleteCategory(id: $id)
   }
 `;
+
+

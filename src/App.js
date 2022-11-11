@@ -24,6 +24,7 @@ import CreateRolePage from "pages/createRole";
 import EditRolePage from "pages/editRole";
 import RolePage from "pages/roles";
 import EditCategoryPage from "pages/editcategory";
+import CreateBannerPage from "pages/createBanner";
 import EditProductPage from "pages/editproduct";
 import UserRolePage from "pages/userRoles";
 import CreateUserRolePage from "pages/createUserRole";
@@ -77,7 +78,8 @@ export const navConfig = [
     component: CreateProductPage,
     layout: CommonLayout,
     permissions: [Permissions.CREATE_PRODUCT],
-    showNav: true,
+    showNav: false,
+    showInDropdown: true,
     isPrivate: true
   },
   {
@@ -87,7 +89,8 @@ export const navConfig = [
     component: CategoryPage,
     layout: CommonLayout,
     permissions: [Permissions.CREATE_CATEGORY],
-    showNav: true,
+    showNav: false,
+    showInDropdown: true,
     isPrivate: true
   },
   {
@@ -97,7 +100,8 @@ export const navConfig = [
     component: SubCategoryPage,
     layout: CommonLayout,
     permissions: [Permissions.CREATE_CATEGORY],
-    showNav: true,
+    showNav: false,
+    showInDropdown: true,
     isPrivate: true
   },
   {
@@ -141,7 +145,8 @@ export const navConfig = [
     path: "/roles",
     component: RolePage,
     layout: CommonLayout,
-    showNav: true,
+    showNav: false,
+    showInDropdown: true,
     isPrivate: true,
     permissions: [Permissions.CREATE_ROLE]
   },
@@ -160,9 +165,21 @@ export const navConfig = [
     path: "/permissions",
     component: PermissionPage,
     layout: CommonLayout,
-    showNav: true,
+    showNav: false,
+    showInDropdown: true,
     isPrivate: true,
     permissions: [Permissions.CREATE_PERMISSION]
+  },
+  {
+    id: "createBanner",
+    title: "Create Banner",
+    path: "/createBanner",
+    component: CreateBannerPage,
+    layout: CommonLayout,
+    showNav: false,
+    showInDropdown: true,
+    isPrivate: true,
+    permissions: [Permissions.CREATE_BANNER]
   },
   {
     id: "createPermission",
@@ -189,7 +206,8 @@ export const navConfig = [
     path: "/userRoles",
     component: UserRolePage,
     layout: CommonLayout,
-    showNav: true,
+    showNav: false,
+    showInDropdown: true,
     isPrivate: true,
     permissions: [Permissions.CREATE_USER_ROLE]
   },

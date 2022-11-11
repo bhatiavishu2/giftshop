@@ -93,16 +93,17 @@ const Home = () => {
         showIndicators={false}
       >
         {(bannerUrls || "").split(",").map((url) => (
-          <div
-            className="banner"
-            style={{
-              backgroundImage: `url('${imagesUrl}/${url}')`,
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center center",
-              height: "400px"
-            }}
-          />
+          // <div
+          //   className="banner"
+          //   style={{
+          //     backgroundImage: `url('${imagesUrl}/${url}')`,
+          //     backgroundSize: "cover",
+          //     backgroundRepeat: "no-repeat",
+          //     backgroundPosition: "center center",
+          //     height: "400px"
+          //   }}
+          // />
+          <img src={`${imagesUrl}/${url}`} alt="banner" />
         ))}
       </Carousel>
       {/* <img src={`${imagesUrl}/${banner.bannerUrl}`} alt="Banner" /> */}

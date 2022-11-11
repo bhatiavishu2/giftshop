@@ -65,19 +65,19 @@ const Home = () => {
   const handleProductOnEdit = (data) => {
     history.push(`/editProduct/${data.id}`);
   };
-  let bannerUrls = banner.bannerUrls;
+  let bannerUrls = banner?.bannerUrls;
   if (
     !isMobileAndTablet()&& authState.hasPermissions([Permissions.RESELLER, Permissions.SHOPKEEPER])
   ) {
-    bannerUrls = banner.merchantBannerUrls;
+    bannerUrls = banner?.merchantBannerUrls;
   } 
    if (isMobileAndTablet()) {
     if(
       authState.hasPermissions([Permissions.RESELLER, Permissions.SHOPKEEPER])
     ){
-      bannerUrls = banner.merchantMobileBannerUrls;
+      bannerUrls = banner?.merchantMobileBannerUrls;
     }
-    bannerUrls = banner.mobileBannerUrls;
+    bannerUrls = banner?.mobileBannerUrls;
   }
   return (
     <div>
@@ -90,7 +90,7 @@ const Home = () => {
         autoPlay
         showIndicators={false}
       >
-        {bannerUrls.split(",").map((url) => (
+        {(bannerUrls || '').split(",").map((url) => (
           <div
             className="banner"
             style={{

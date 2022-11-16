@@ -5,7 +5,7 @@ import _get from "lodash.get";
 import {createAboutUs, getAboutUs} from 'graphql/about'
 import {  useMutation,useQuery } from '@apollo/client';
 import { useHistory } from "react-router-dom";
-import Textarea from "components/core/form-controls/Textarea";
+import HTMLEditor from "components/core/form-controls/HTMLEditor";
 
 const ProductSchema = Yup.object().shape({
     html: Yup.string().required("html is required!"),
@@ -35,13 +35,14 @@ const CreateProduct = () => {
         }
       }}
     >
-      {() => (
+      {({setFieldValue}) => (
         <Form  className="form-container">
           <Field
             name="html"
             type="text"
             placeholder="About Us"
-            component={Textarea}
+            component={HTMLEditor}
+            setFieldValue={setFieldValue}
           />
           <button className="auth-button block" onClick={() => {}}>
             Create About US

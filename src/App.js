@@ -16,6 +16,8 @@ import CheckoutPage from "pages/checkout";
 import CreateProductPage from "pages/createproduct";
 import EditProfilePage from "pages/editProfile";
 import CategoryPage from "pages/createCategory";
+import ContactUsPage from "pages/contactUs";
+import AboutUsPage from "pages/aboutUs";
 import SubCategoryPage from "pages/createSubCategory";
 import PermissionPage from "pages/permissions";
 import CreatePermissionPage from "pages/createPermission";
@@ -25,6 +27,8 @@ import EditRolePage from "pages/editRole";
 import RolePage from "pages/roles";
 import EditCategoryPage from "pages/editcategory";
 import CreateBannerPage from "pages/createBanner";
+import CreateAboutUsPage from "pages/createAboutUs";
+import CreateContactUsPage from "pages/createContactUs";
 import EditProductPage from "pages/editproduct";
 import UserRolePage from "pages/userRoles";
 import CreateUserRolePage from "pages/createUserRole";
@@ -220,6 +224,46 @@ export const navConfig = [
     showNav: false,
     isPrivate: true,
     permissions: [Permissions.CREATE_USER_ROLE]
+  },
+  {
+    id: "createAboutUs",
+    title: "Create About Us",
+    path: "/createAboutUs",
+    component: CreateAboutUsPage,
+    layout: CommonLayout,
+    showNav: false,
+    isPrivate: true,
+    showInDropdown: true,
+    permissions: [Permissions.CREATE_ABOUT_US]
+  },
+  {
+    id: "createContactUs",
+    title: "Create Contact Us",
+    path: "/createContactUS",
+    component: CreateContactUsPage,
+    showInDropdown: true,
+    layout: CommonLayout,
+    showNav: false,
+    isPrivate: true,
+    permissions: [Permissions.CREATE_CONTACT_US]
+  },
+  {
+    id: "contactUs",
+    title: "Contact Us",
+    path: "/contactUS",
+    component: ContactUsPage,
+    layout: CommonLayout,
+    showNav: true,
+    isPrivate: false
+  },
+  {
+    id: "aboutUs",
+    title: "About Us",
+    path: "/aboutUS",
+    component: AboutUsPage,
+    layout: CommonLayout,
+    showNav: true,
+    isPrivate: false
   },
   {
     id: "editProfile",

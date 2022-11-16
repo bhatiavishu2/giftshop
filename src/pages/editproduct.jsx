@@ -10,6 +10,7 @@ import { useHistory } from "react-router-dom";
 import {  useMutation, useQuery } from '@apollo/client';
 import {uploadImages} from 'graphql/upload'
 import {updateProduct, getProductById} from 'graphql/products'
+import CheckboxInput, { Checkbox } from "components/core/form-controls/Checkbox";
 const ProductSchema = Yup.object().shape({
     name: Yup.string().required("Name is required!"),
     price: Yup.string().required("Price is required!"),
@@ -46,6 +47,7 @@ const EditProduct = ({match}) => {
         productDescription:"",
         file:[],
         previewFile: "",
+        isOutOfStock:false,
         videoUrl:"",
         ...restProductData,
         category: subCategoryDetails.categoryDetails
@@ -108,6 +110,15 @@ const EditProduct = ({match}) => {
             type="text"
             placeholder="Video URL"
             component={Input}
+          />
+
+          <Field
+            component={Checkbox}
+            name="isOutOfStock"
+            id="isOutOfStock"
+            label={"Out Of Stock"}
+            icon={ ""}
+            value={values.isOutOfStock}
           />
             <Field
             name="category"

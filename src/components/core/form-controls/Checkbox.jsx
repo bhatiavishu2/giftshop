@@ -7,7 +7,7 @@ const InputFeedback = ({ error }) =>
   error ? <div className={classNames("input-feedback")}>{error}</div> : null;
 
 // Radio input
-const Checkbox = ({
+export const Checkbox = ({
   field: { name, value, onChange, onBlur },
   id,
   label,
@@ -16,13 +16,13 @@ const Checkbox = ({
   ...props
 }) => {
   return (
-    <div className={classNames("checkbox", { checked: id === value })}>
+    <div className={classNames("checkbox", { checked: !!value })}>
       <input
         name={name}
         id={id}
         type="checkbox"
         value={id} // could be something else for output?
-        checked={id === value}
+        checked={value}
         onChange={onChange}
         onBlur={onBlur}
         {...props}
@@ -85,9 +85,10 @@ const CheckboxInput = ({
 }) => {
   return (
     <CheckboxGroup id={name} label={label} display={display}>
-      {options.map((option) => {
+      {options.map((option, index) => {
         return (
           <Field
+          key={index}
             component={Checkbox}
             name={name}
             id={option.value}

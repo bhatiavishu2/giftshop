@@ -126,3 +126,21 @@
     }
   }
 }
+.out-of-stock{
+  margin: 10px;
+    font-style: italic;
+    color: darkgrey;
+    font-weight: 700;
+}
+
+.download-image{
+  margin: 10px;
+  font-size: 10px;
+  position: absolute;
+  top: 0;
+  right: 31px;
+  width: 35px;
+}
+.image-wrapper{
+  position: relative;
+}

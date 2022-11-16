@@ -9,6 +9,7 @@ import { getCategories} from 'graphql/category';
 import {  useMutation, useQuery } from '@apollo/client';
 import {uploadImages} from 'graphql/upload'
 import {createProduct} from 'graphql/products'
+import {Checkbox} from "components/core/form-controls/Checkbox";
 const ProductSchema = Yup.object().shape({
     name: Yup.string().required("Name is required!"),
     price: Yup.string().required("Price is required!"),
@@ -38,7 +39,8 @@ const CreateProduct = () => {
         productDescription:"",
         file:[],
         previewFile: "",
-        videoUrl: ""
+        videoUrl: "",
+        isOutOfStock:false,
       }}
       validationSchema={ProductSchema}
       onSubmit={async (values, { resetForm }) => {
@@ -97,6 +99,14 @@ const CreateProduct = () => {
             type="text"
             placeholder="Video URL"
             component={Input}
+          />
+              <Field
+            component={Checkbox}
+            name="isOutOfStock"
+            id="isOutOfStock"
+            label={"Out Of Stock"}
+            icon={ ""}
+            value={values.isOutOfStock}
           />
             <Field
             name="category"

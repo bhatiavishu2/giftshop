@@ -1,4 +1,3 @@
-
 import { gql } from "@apollo/client";
 export const getHomePageData = gql`
   query homePageData($latestProductLimit: Int, $bannerLimit: Int) {
@@ -13,34 +12,35 @@ export const getHomePageData = gql`
       }
     }
     latestProducts(limit: $latestProductLimit) {
+      id
+      name
+      price
+      wholeSalePrice
+      images
+      productDescription
+      subCategory
+      previewFile
+      shippingCharges
+      localShippingCharges
+      videoUrl
+      isOutOfStock
+      subCategoryDetails {
         id
         name
-        price
-        wholeSalePrice
-        images
-        productDescription
-        subCategory
-        previewFile
-        shippingCharges
-        localShippingCharges
-        videoUrl
-        subCategoryDetails {
+        category
+        categoryDetails {
           id
           name
-          category
-          categoryDetails {
-            id
-            name
-            categoryImage
-          }
+          categoryImage
         }
       }
-      banners(limit:$bannerLimit){
-        id
-        bannerUrls
-        merchantBannerUrls
-        merchantMobileBannerUrls
-        mobileBannerUrls
-      }
+    }
+    banners(limit: $bannerLimit) {
+      id
+      bannerUrls
+      merchantBannerUrls
+      merchantMobileBannerUrls
+      mobileBannerUrls
+    }
   }
 `;

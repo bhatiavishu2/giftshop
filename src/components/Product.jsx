@@ -30,9 +30,9 @@ const ProductCard = ({ data, onPreview , onClick, onDelete, onEdit}) => {
       </div>
       {name && <h4 className="product-name">{name}</h4>}
     <div> {price && <p className="product-price">{authState.hasPermissions([Permissions.RESELLER, Permissions.SHOPKEEPER])?  wholeSalePrice:price}</p>}
-     {shippingCharges && <p className="product-price shipping-charges">{shippingCharges || 0} (Shipping Charges)</p>}
+     {shippingCharges && <p className="product-price shipping-charges">{Number(shippingCharges) ? shippingCharges: 'Free Shipping'} (Shipping Charges)</p>}
 
-     {localShippingCharges && authState.hasPermissions([Permissions.RESELLER, Permissions.SHOPKEEPER]) && <p className="product-price shipping-charges">{localShippingCharges || 0} (Local Shipping Charges)</p>}     </div>
+     {localShippingCharges && authState.hasPermissions([Permissions.RESELLER, Permissions.SHOPKEEPER]) && <p className="product-price shipping-charges">{Number(localShippingCharges) ? localShippingCharges: 'Free Shipping'}  (Local Shipping Charges)</p>}     </div>
      {authState.hasPermissions([Permissions.DELETE_CATEGORY, Permissions.DELETE_PRODUCT]) && <button className="outline delete-icon" onClick={async (e) => {
       e.stopPropagation()
       confirmAlert({

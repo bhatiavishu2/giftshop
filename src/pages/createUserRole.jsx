@@ -58,7 +58,7 @@ const CreateProduct = () => {
             type="text"
             placeholder="User"
             component={Select}
-            options={users.map(c => ({name:c.name, value: c.id, label:`${c.name} - ${c.phone}`}))}
+            options={users.map(c => ({name:c.name, value: c.id, label:`${c.name} - ${c.phone} - ${c.address} - ${c.companyName}`}))}
           />
         
            <Field

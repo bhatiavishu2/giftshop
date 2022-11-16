@@ -4,12 +4,13 @@ import * as Yup from "yup";
 import _get from "lodash.get";
 import Input from "components/core/form-controls/Input";
 import Select from "components/core/form-controls/Select";
-import Textarea from "components/core/form-controls/Textarea"
 import { getCategories} from 'graphql/category';
 import {  useMutation, useQuery } from '@apollo/client';
 import {uploadImages} from 'graphql/upload'
 import {createProduct} from 'graphql/products'
 import {Checkbox} from "components/core/form-controls/Checkbox";
+import HTMLEditor from "components/core/form-controls/HTMLEditor";
+
 const ProductSchema = Yup.object().shape({
     name: Yup.string().required("Name is required!"),
     price: Yup.string().required("Price is required!"),
@@ -92,7 +93,8 @@ const CreateProduct = () => {
             name="productDescription"
             type="text"
             placeholder="Product Description"
-            component={Textarea}
+            component={HTMLEditor}
+            setFieldValue={setFieldValue}
           />
            <Field
             name="videoUrl"

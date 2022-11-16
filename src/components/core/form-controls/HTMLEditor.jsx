@@ -33,7 +33,7 @@ const HTMLEditor = ({
       </label>
     )}
       <Editor
-                editorStyle={{border:'1px solid black'}}
+                editorStyle={{border:'1px solid black', background: "white", paddingLeft:'10px'}}
               editorClassName="editor"
               editorState={
                 state
@@ -44,6 +44,7 @@ const HTMLEditor = ({
             onBlur={
                 ()=> setFieldValue(field.name,draftToHtml(convertToRaw(state.getCurrentContent())))
              }
+             placeholder={placeholder}
     />
     {touched[field.name] && errors[field.name] && (
       <div className="invalid-feedback">{errors[field.name]}</div>

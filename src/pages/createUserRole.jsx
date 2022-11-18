@@ -14,7 +14,8 @@ import {getUsers} from "graphql/auth"
 const ProductSchema = Yup.object().shape({
 });
 
-const CreateProduct = () => {
+const CreateProduct = ({match}) => {
+  console.log(match)
   const authDispatch = useContext(AuthDispatchContext);
   const { loading:isLoading, error, data = {} } = useQuery(getRoles);
   const { loading:userLoading,  data:userData = {} } = useQuery(getUsers);
@@ -31,7 +32,7 @@ const CreateProduct = () => {
     <Formik
 
       initialValues={{
-        userId: "",
+        userId:match?.params?.id  || "",
         roleIds:""
       }}
       validationSchema={ProductSchema}

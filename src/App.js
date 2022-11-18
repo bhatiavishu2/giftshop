@@ -261,6 +261,16 @@ export const navConfig = [
     permissions: [Permissions.CREATE_USER_ROLE]
   },
   {
+    id: "createUserRole",
+    title: "Create User Role",
+    path: "/editUserRole/:id",
+    component: CreateUserRolePage,
+    layout: CommonLayout,
+    showNav: false,
+    isPrivate: true,
+    permissions: [Permissions.CREATE_USER_ROLE]
+  },
+  {
     id: "createAboutUs",
     title: "Create About Us",
     path: "/createAboutUs",

@@ -75,6 +75,17 @@ export const getUsers = gql`
       name
       companyName
       address
+      userRoles {
+        userId
+        roleIds
+        roleDetails {
+          permissions
+          name
+          permissionsDetails {
+            name
+          }
+        }
+      }
     }
   }
 `;
@@ -87,5 +98,11 @@ export const getUserById = gql`
       companyName
       address
     }
+  }
+`;
+
+export const deleteUser = gql`
+  mutation deleteUser($id: ID!) {
+    deleteUser(id: $id)
   }
 `;

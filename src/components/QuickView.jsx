@@ -63,7 +63,7 @@ const QuickView = (props) => {
                     target={"_blank"}
                     rel="noreferrer"
                   >
-                    <img src="/download.png" width={35} alt="download" />
+                    <img src="/download.png" width={35} alt="download" /> Download Image
                   </a>
                 </div>
               ))}

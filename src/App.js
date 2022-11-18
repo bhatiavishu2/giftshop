@@ -37,11 +37,46 @@ import "assets/scss/style.scss";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import {
+  ApolloProvider,
+  ApolloClient,
+  InMemoryCache,
+  HttpLink,
+  ApolloLink,
+  concat
+} from "@apollo/client";
 import { Permissions } from "./constants/common";
+import { onError } from "@apollo/client/link/error";
+
+const authMiddleware = new ApolloLink((operation, forward) => {
+  // add the authorization to the headers
+  operation.setContext(({ headers = {} }) => ({
+    headers: {
+      ...headers,
+      authorization: JSON.parse(localStorage.getItem("token")) || null
+    }
+  }));
+
+  return forward(operation);
+});
+
+const httpLink = new HttpLink({ uri: endpoint });
+const logoutLink = onError(({ graphQLErrors }) => {
+  if (graphQLErrors?.length && graphQLErrors[0].message === "Unauthorized") {
+    window.location.href = "/auth";
+  }
+});
+const formatDateLink = new ApolloLink((operation, forward) => {
+  return forward(operation).map((response) => {
+    return response;
+  });
+});
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: endpoint
+  link: concat(
+    authMiddleware,
+    logoutLink.concat(formatDateLink.concat(httpLink))
+  )
 });
 
 export const navConfig = [

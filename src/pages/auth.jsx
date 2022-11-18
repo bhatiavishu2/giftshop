@@ -61,6 +61,7 @@ const AuthPage = () => {
           const userData = await submitLogin({ variables:
             values
           });
+          localStorage.setItem("token", JSON.stringify(userData?.data?.login?.token));
           getContext({ variables:
             {token:userData?.data?.login?.token}
           });

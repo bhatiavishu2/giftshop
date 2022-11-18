@@ -45,7 +45,7 @@ const reducer = (state, action) => {
 };
 
 export const signIn = (dispatch, userData) => {
-  localStorage.setItem("user", JSON.stringify(userData));
+  localStorage.setItem("user", JSON.stringify({userData,  timestamp: new Date().getTime()}));
   return dispatch({
     type: "LOGIN_SUCCESS",
     payload: {

@@ -64,6 +64,7 @@ const httpLink = new HttpLink({ uri: endpoint });
 const logoutLink = onError(({ graphQLErrors }) => {
   if (graphQLErrors?.length && graphQLErrors[0].message === "Unauthorized") {
     window.location.href = "/auth";
+    localStorage.clear();
   }
 });
 const formatDateLink = new ApolloLink((operation, forward) => {

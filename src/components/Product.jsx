@@ -29,7 +29,7 @@ const ProductCard = ({ data, onPreview , onClick, onDelete, onEdit}) => {
       {getMedia({image: categoryImage || (images && images[0]), index:1, onPreview, data,autoPlay:false})}
       </div>
       {name && <h4 className="product-name">{name}</h4>}
-    <div> {price && <p className="product-price">{authState.hasPermissions([Permissions.RESELLER])?  wholeSalePrice:price}</p>}
+    <div> {price && <p className="product-price">{authState.hasPermissions([Permissions.RESELLER,Permissions.SHOPKEEPER])?  wholeSalePrice:price}</p>}
      {shippingCharges && !authState.hasPermissions([Permissions.SHOPKEEPER]) && <p className="product-price shipping-charges">{Number(shippingCharges) ? shippingCharges: 'Free Shipping'} (Shipping Charges)</p>}
 
      {localShippingCharges && authState.hasPermissions([Permissions.RESELLER]) && <p className="product-price shipping-charges">{Number(localShippingCharges) ? localShippingCharges: 'Free Shipping'}  (Local Shipping Charges)</p>}     </div>

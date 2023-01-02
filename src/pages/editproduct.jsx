@@ -9,7 +9,7 @@ import { getCategories} from 'graphql/category';
 import { useHistory } from "react-router-dom";
 import {  useMutation, useQuery } from '@apollo/client';
 import {uploadImages} from 'graphql/upload'
-import {updateProduct, getProductById} from 'graphql/products'
+import {updateProduct, getProductById, createProduct} from 'graphql/products'
 import CheckboxInput, { Checkbox } from "components/core/form-controls/Checkbox";
 const ProductSchema = Yup.object().shape({
     name: Yup.string().required("Name is required!"),
@@ -23,6 +23,7 @@ const ProductSchema = Yup.object().shape({
 const EditProduct = ({match}) => {
   const { loading:isLoading, error, data = {} } = useQuery(getCategories);
   const [submitLogin] = useMutation(updateProduct);
+  const [submitCreateProduct] = useMutation(createProduct);
   const{categories = []} = data
   const history = useHistory();
   const  { loading:productLoading, data: productData  ={} } = useQuery(getProductById, {variables:{
@@ -48,6 +49,7 @@ const EditProduct = ({match}) => {
         file:[],
         previewFile: "",
         isOutOfStock:false,
+        copyToOtherCategory: false,
         videoUrl:"",
         ...restProductData,
         category: subCategoryDetails.categoryDetails
@@ -55,10 +57,17 @@ const EditProduct = ({match}) => {
       validationSchema={ProductSchema}
       onSubmit={async (values, { resetForm }) => {
         try {
+          if(values.copyToOtherCategory) {
+            await submitCreateProduct({ variables:
+              values,
+               id:match?.params?.id
+            });
+          } else {
          await submitLogin({ variables:
             values,
              id:match?.params?.id
           });
+        }
           history.push(`/products/${subCategoryDetails.categoryDetails.id}`);
          
         } catch (err) {
@@ -161,6 +170,15 @@ const EditProduct = ({match}) => {
               setFieldValue("previewFile", event.currentTarget.files);
             }}
           />
+
+<Field
+            component={Checkbox}
+            name="copyToOtherCategory"
+            id="copyToOtherCategory"
+            label={"Copy to other category"}
+            icon={ ""}
+            value={values.isOutOfStock}
+          />
            
            <button disabled={values.file.length === 0} className="auth-button block" onClick={async (e) => {
               e.preventDefault()
@@ -181,7 +199,7 @@ const EditProduct = ({match}) => {
             Upload Preview File
           </button>
           <button className="auth-button block" disabled={values.images.length === 0} onClick={() => {}}>
-            Update Product
+            {!values.copyToOtherCategory?'Update Product':'Create Product'}
           </button>
 
         

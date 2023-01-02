@@ -11,16 +11,18 @@ import { getHomePageData } from "graphql/home";
 import { imagesUrl } from "../constants";
 import { Carousel } from "react-responsive-carousel";
 import { isMobileAndTablet } from "../utils";
+import { Link } from "react-router-dom";
+const color = "#" + (((1 << 24) * Math.random()) | 0).toString(16);
 
 const Home = () => {
   const history = useHistory();
   const authState = useContext(AuthStateContext);
   const {
     loading,
-    data: { categories, latestProducts = [], banners: [banner] = [] } = {},
+    data: { categories, latestProducts = [], banners: [banner] = [], contact,about } = {},
     refetch
   } = useQuery(getHomePageData, {
-    variables: { latestProductLimit: 5, bannerLimit: 1 }
+    variables: { latestProductLimit: 10, bannerLimit: 1 }
   });
 
   const [deleteItem] = useMutation(deleteCategory);
@@ -106,8 +108,39 @@ const Home = () => {
           <img src={`${imagesUrl}/${url}`} alt="banner" />
         ))}
       </Carousel>
+      
       {/* <img src={`${imagesUrl}/${banner.bannerUrl}`} alt="Banner" /> */}
       <div className="container">
+      <div className="product-wrapper">
+          <div className="products all-categories">
+            {categories &&
+              categories.map((data) => {
+                  return (
+                    <Link
+                      style={{
+                        color: "black",
+                        textDecoration: "none",
+                        maxHeight: '100px'
+                      }}
+                      to={`/products/${data.id}`}
+                    >
+                      {" "}
+                      <span className="sub-category-icon">
+                        <label
+                          style={{ background: color }}
+                          className="sub-category-label"
+                        >
+                          {data.name[0]}
+                        </label>
+                        <h5 style={{ color: color }} className="sub-category-text">
+                          {data.name}
+                        </h5>
+                      </span>
+                    </Link>
+                  );
+              })}
+          </div>
+        </div>
         <div className="products-wrapper">
           <h3
             className="heading"
@@ -132,29 +165,32 @@ const Home = () => {
           </div>
           {/* </Parallax> */}
         </div>
-
-        <div className="product-wrapper">
+       
+        <div className="products-wrapper">
           <h3
             className="heading"
             style={{ textAlign: "center", paddingTop: "20px" }}
           >
-            All Categories
+            About Us
           </h3>
-
-          <div className="products all-categories">
-            {categories &&
-              categories.map((data) => {
-                return (
-                  <ProductCard
-                    onEdit={handleOnEdit}
-                    onDelete={handleOnDelete}
-                    key={data.id}
-                    data={data}
-                    onClick={() => onPreview(data)}
-                  />
-                );
-              })}
-          </div>
+         <div className="about-us"
+          dangerouslySetInnerHTML={{
+            __html: about.html
+          }}
+        />
+        </div>
+        <div className="products-wrapper">
+          <h3
+            className="heading"
+            style={{ textAlign: "center", paddingTop: "20px" }}
+          >
+            Contact Us
+          </h3>
+        <div className="contact-us"
+          dangerouslySetInnerHTML={{
+            __html: contact.html
+          }}
+        />
         </div>
       </div>
       {previewData && (

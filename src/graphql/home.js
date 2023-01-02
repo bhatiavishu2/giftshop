@@ -1,6 +1,16 @@
 import { gql } from "@apollo/client";
 export const getHomePageData = gql`
   query homePageData($latestProductLimit: Int, $bannerLimit: Int) {
+    contact {
+      id
+      html
+    }
+
+    about {
+      id
+      html
+    }
+
     categories {
       id
       name

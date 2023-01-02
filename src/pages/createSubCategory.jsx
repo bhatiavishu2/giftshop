@@ -39,6 +39,7 @@ const CreateProduct = () => {
             values
           });
           resetForm();
+          history.push('/subCategories')
           // getContext({ variables:
           //   {token:userData?.data?.login?.token}
           // });

@@ -30,8 +30,11 @@ import CreateBannerPage from "pages/createBanner";
 import CreateAboutUsPage from "pages/createAboutUs";
 import CreateContactUsPage from "pages/createContactUs";
 import EditProductPage from "pages/editproduct";
+import EditSubCategoryPage from "pages/editSubCategory";
 import UserRolePage from "pages/userRoles";
 import CreateUserRolePage from "pages/createUserRole";
+import CategoriesPage from "pages/categories";
+import SubCategoriesPage from "pages/subCategories";
 import { endpoint } from "./constants";
 import "assets/scss/style.scss";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -130,7 +133,7 @@ export const navConfig = [
     layout: CommonLayout,
     permissions: [Permissions.CREATE_CATEGORY],
     showNav: false,
-    showInDropdown: true,
+    showInDropdown: false,
     isPrivate: true
   },
   {
@@ -141,7 +144,7 @@ export const navConfig = [
     layout: CommonLayout,
     permissions: [Permissions.CREATE_CATEGORY],
     showNav: false,
-    showInDropdown: true,
+    showInDropdown: false,
     isPrivate: true
   },
   {
@@ -155,6 +158,15 @@ export const navConfig = [
     id: "categoryById",
     path: "/categories/:categoryId",
     component: EditCategoryPage,
+    layout: CommonLayout,
+    showNav: false,
+    isPrivate: true,
+    permissions: [Permissions.CREATE_CATEGORY]
+  },
+  {
+    id: "editSubCategory",
+    path: "/subcategories/:id",
+    component: EditSubCategoryPage,
     layout: CommonLayout,
     showNav: false,
     isPrivate: true,
@@ -209,6 +221,28 @@ export const navConfig = [
     showInDropdown: true,
     isPrivate: true,
     permissions: [Permissions.CREATE_PERMISSION]
+  },
+  {
+    id: "categories",
+    title: "Categories",
+    path: "/categories",
+    component: CategoriesPage,
+    layout: CommonLayout,
+    showNav: false,
+    showInDropdown: true,
+    isPrivate: true,
+    permissions: [Permissions.CREATE_CATEGORY]
+  },
+  {
+    id: "subCategories",
+    title: "Sub Categories",
+    path: "/subCategories",
+    component: SubCategoriesPage,
+    layout: CommonLayout,
+    showNav: false,
+    showInDropdown: true,
+    isPrivate: true,
+    permissions: [Permissions.CREATE_CATEGORY]
   },
   {
     id: "createBanner",

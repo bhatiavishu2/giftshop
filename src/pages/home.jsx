@@ -112,6 +112,12 @@ const Home = () => {
       {/* <img src={`${imagesUrl}/${banner.bannerUrl}`} alt="Banner" /> */}
       <div className="container">
       <div className="product-wrapper">
+      <h3
+            className="heading"
+            style={{ textAlign: "center",marginTop: "30px" }}
+          >
+            All Categories
+          </h3>
           <div className="products all-categories">
             {categories &&
               categories.map((data) => {

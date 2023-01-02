@@ -6,6 +6,7 @@ import Input from "components/core/form-controls/Input";
 import {createCategory} from 'graphql/category';
 import {  useMutation } from '@apollo/client';
 import {uploadImages} from 'graphql/upload'
+import { useHistory } from "react-router-dom";
 
 const ProductSchema = Yup.object().shape({
     name: Yup.string().required("Name is required!"),
@@ -13,6 +14,7 @@ const ProductSchema = Yup.object().shape({
 
 const CreateCategory = () => {
   const [submitCategory] = useMutation(createCategory);
+  const history = useHistory()
   return (
     <Formik
       initialValues={{
@@ -27,6 +29,7 @@ const CreateCategory = () => {
             values
           });
           resetForm();
+          history.push('/categories')
         } catch (err) {
           console.error(err);
         }

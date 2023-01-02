@@ -41,7 +41,7 @@ const EditCategory = ({match}) => {
             {...values, categoryId:match?.params?.categoryId}
           });
           
-          history.push("/");
+          history.push('/categories')
          
         } catch (err) {
           console.error(err);

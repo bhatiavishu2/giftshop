@@ -98,7 +98,7 @@ const AuthPage = () => {
           <p>
             New here?{" "}
             <a href="/#" onClick={goToRegister}>
-              Sign Up Now!
+              Join as a reseller
             </a>
           </p>
         </Form>

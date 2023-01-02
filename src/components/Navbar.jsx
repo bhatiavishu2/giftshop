@@ -101,6 +101,7 @@ function Header({ navConfig }) {
               <Link className="nav-link" to="/auth">
                 {" "}
                 <img width="35" src="/login.png" alt="login" title="login" />
+                Login as a reseller
               </Link>
             )}
             {authState.user && (

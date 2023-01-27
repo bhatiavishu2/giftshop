@@ -36,13 +36,8 @@ const Permissions = () => {
     }
 
 
-  const onPreview = (data) =>{
-    setPreviewData(data)
-    setModalActive(true)
-  }
-  const closeModal = () => {
-    setModalActive(false);
-  }
+
+
   const handleOnDelete = async (data) =>{
     await deleteItem({ variables:
       {id:data.id}

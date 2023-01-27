@@ -50,10 +50,6 @@ const Product = ({ match }) => {
       );
   }
 
-  const onPreview = (data) => {
-    setPreviewData(data);
-    setModalActive(true);
-  };
   const closeModal = () => {
     setModalActive(false);
   };
@@ -64,6 +60,10 @@ const Product = ({ match }) => {
   const handleOnEdit = (data) => {
     history.push(`/editProduct/${data.id}`);
   };
+
+  const onPreview = (data) => {
+    history.push(`/pdp/${data.id}`);
+  }
 
   if (isLoading) {
     return (

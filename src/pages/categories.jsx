@@ -36,10 +36,7 @@ const Permissions = () => {
     }
 
 
-  const onPreview = (data) =>{
-    setPreviewData(data)
-    setModalActive(true)
-  }
+
   const closeModal = () => {
     setModalActive(false);
   }

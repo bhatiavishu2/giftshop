@@ -27,8 +27,6 @@ const Home = () => {
 
   const [deleteItem] = useMutation(deleteCategory);
   const [deleteProductItem] = useMutation(deleteProduct);
-  const [previewData, setPreviewData] = useState(null);
-  const [modalActive, setModalActive] = useState(false);
   useEffect(() => {
     refetch();
   }, []);
@@ -52,14 +50,11 @@ const Home = () => {
       </div>
     );
   }
+const onProductPreview  = (data) =>{
+  history.push(`/pdp/${data.id}`);
+}
 
-  const onProductPreview = (data) => {
-    setPreviewData(data);
-    setModalActive(true);
-  };
-  const closeModal = () => {
-    setModalActive(false);
-  };
+
   const handleProductOnDelete = async (data) => {
     await deleteProductItem({ variables: { id: data.id } });
     await refetch();
@@ -199,13 +194,7 @@ const Home = () => {
         />
         </div>
       </div>
-      {previewData && (
-        <QuickView
-          product={previewData}
-          openModal={modalActive}
-          closeModal={closeModal}
-        />
-      )}
+
     </div>
   );
 };

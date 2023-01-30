@@ -55,9 +55,9 @@ export function PDP({ match }) {
           <div className="col-md-6">
             <div id="slider" className="owl-carousel product-slider">
               <Carousel
-                showArrows={true}
+                showArrows={false}
                 infiniteLoop
-                showThumbs={false}
+                showThumbs={true}
                 showStatus={true}
                 autoFocus={false}
                 showIndicators={false}
@@ -65,7 +65,7 @@ export function PDP({ match }) {
                 {uniqueImages.map((image, index) => (
                   <div
                     className="image-wrapper"
-                    style={{ maxHeight: "500px" }}
+                    style={{ maxHeight: "800px" }}
                     onClick={onPreview}
                   >
                     {getMedia({ image, index, autoPlay: false })}
@@ -169,6 +169,16 @@ export function PDP({ match }) {
                     )}{" "}
                 </div>
               </div>
+              {videoUrl && (
+                <a
+                  className="product-description"
+                  target={"_blank"}
+                  href={videoUrl}
+                  rel="noreferrer"
+                >
+                  Click here to see video
+                </a>
+              )}
               {productDescription && (
                 <p
                   className="product-description"
@@ -199,21 +209,7 @@ export function PDP({ match }) {
           </div>
         </div>
         <div className="product-info-tabs">
-          <ul className="nav nav-tabs" id="myTab" role="tablist">
-            <li className="nav-item">
-              <a
-                className="nav-link active"
-                id="description-tab"
-                data-toggle="tab"
-                href="#description"
-                role="tab"
-                aria-controls="description"
-                aria-selected="true"
-              >
-                Description
-              </a>
-            </li>
-          </ul>
+    
           <div className="tab-content" id="myTabContent">
             <div
               className="tab-pane fade show active"
@@ -221,24 +217,8 @@ export function PDP({ match }) {
               role="tabpanel"
               aria-labelledby="description-tab"
             >
-              {videoUrl && (
-                <a
-                  className="product-description"
-                  target={"_blank"}
-                  href={videoUrl}
-                  rel="noreferrer"
-                >
-                  Click here to see video
-                </a>
-              )}
-              {productDescription && (
-                <p
-                  className="product-description"
-                  dangerouslySetInnerHTML={{
-                    __html: productDescription
-                  }}
-                ></p>
-              )}
+              
+      
 
               {previewData && (
                 <QuickView

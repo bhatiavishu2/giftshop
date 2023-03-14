@@ -2,7 +2,7 @@ import Table from "react-bootstrap/Table";
 import { confirmAlert } from 'react-confirm-alert';
 
 function ResponsiveTable({ data, onEdit, onDelete, disableActions}) {
-  const keys = data[0];
+  const keys = data[0] || {};
   const { __typename, ...restKeys } = keys;
   const getColumnValue = (item, key) =>{
   if(!item[key] || typeof item[key] === 'string'){

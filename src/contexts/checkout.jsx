@@ -4,7 +4,8 @@ import useLocalStorage from "hooks/useLocalStorage";
 export const CHECKOUT_STEPS = {
   AUTH: "auth",
   SHIPPING: "shipping",
-  PAYMENT: "payment"
+  PAYMENT: "payment",
+  Success: 'success'
 };
 
 const initialState = {

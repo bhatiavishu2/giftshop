@@ -120,11 +120,15 @@ header {
     margin-right: 8px;
   }
 }
-
+.nav-link{
+  display: flex !important;
+  align-items: center !important;
+}
 // Cart
 .cart {
   display: flex;
   display: -webkit-flex;
+  align-items: center;
   margin-left: 64px;
   position: relative;
   z-index: 99;
@@ -133,13 +137,13 @@ header {
   }
 }
 .cart-info {
+  color:var(--bs-nav-link-color);
   @media (max-width: 991px) {
     display: none;
   }
 }
 .cart-info table {
   font-size: 14px;
-  color: $primary-green;
   text-align: right;
   tr {
     padding: 0;

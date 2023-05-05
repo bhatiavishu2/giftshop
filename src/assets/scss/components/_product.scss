@@ -26,6 +26,12 @@
       }
     }
   }
+  .product-details{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
   .product-name, .product-description {
     font-weight: normal;
     font-size: 16px;

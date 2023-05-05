@@ -22,7 +22,7 @@ const Home = () => {
     data: { categories, latestProducts = [], banners: [banner] = [], contact,about } = {},
     refetch
   } = useQuery(getHomePageData, {
-    variables: { latestProductLimit: 10, bannerLimit: 1 }
+    variables: { latestProductLimit: 50, bannerLimit: 1 }
   });
 
   const [deleteItem] = useMutation(deleteCategory);

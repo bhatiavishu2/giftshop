@@ -7,8 +7,16 @@ import { imagesUrl, apkName } from "../constants";
 import { AuthStateContext, signOut, AuthDispatchContext } from "contexts/auth";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Notification from "./Notification";
+import {
+  CartStateContext,
+  CartDispatchContext,
+  toggleCartPopup
+} from "contexts/cart";
+import { CommonDispatchContext, setSearchKeyword } from "contexts/common";
+import CartPreview from "components/CartPreview";
+import {Permissions} from '../constants/common'
 
-function Header({ navConfig }) {
+function Header({ navConfig, cartBounce }) {
   const [isOpen, setOpen] = useState(false);
   const authState = useContext(AuthStateContext);
   const dispatch = useContext(AuthDispatchContext);
@@ -16,6 +24,18 @@ function Header({ navConfig }) {
   const adminPages = navConfig.filter(
     (nav) => nav.showInDropdown && authState.hasPermissions(nav.permissions)
   );
+  const { items: cartItems, isCartOpen } = useContext(CartStateContext);
+  const commonDispatch = useContext(CommonDispatchContext);
+  const cartDispatch = useContext(CartDispatchContext);
+  const cartQuantity = cartItems.length;
+  const cartTotal = cartItems
+    .map((item) => (authState.hasPermissions([Permissions.RESELLER,Permissions.SHOPKEEPER])?  item.wholeSalePrice:item.price) * item.quantity)
+    .reduce((prev, current) => prev + current, 0);
+
+  const handleCartButton = (event) => {
+    event.preventDefault();
+    return toggleCartPopup(cartDispatch);
+  };
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -66,6 +86,41 @@ function Header({ navConfig }) {
             )}
           </Nav>
           <Nav>
+          {  <div className="cart">
+          <div className="cart-info">
+            <table>
+              <tbody>
+                <tr>
+                  <td>No. of items</td>
+                  <td>:</td>
+                  <td>
+                    <strong>{cartQuantity}</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Sub Total</td>
+                  <td>:</td>
+                  <td>
+                    <strong>{cartTotal}</strong>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <a className="cart-icon" href="#" onClick={handleCartButton}>
+            <img
+              className={cartBounce ? "tada" : " "}
+              src="https://res.cloudinary.com/sivadass/image/upload/v1493548928/icons/bag.png"
+              alt="Cart"
+            />
+            {cartQuantity ? (
+              <span className="cart-count">{cartQuantity}</span>
+            ) : (
+              ""
+            )}
+          </a>
+          <CartPreview />
+        </div>}
             {authState.user && (
               <a
                 className="nav-link"
@@ -101,9 +156,10 @@ function Header({ navConfig }) {
               <Link className="nav-link" to="/auth">
                 {" "}
                 <img width="35" src="/login.png" alt="login" title="login" />
-                Login as a reseller
+                Login
               </Link>
             )}
+            
             {authState.user && (
               <Link className="nav-link" to="/editProfile">
                 {" "}
@@ -129,6 +185,8 @@ function Header({ navConfig }) {
                 <img title="logout" width="35" src="/logout.png" alt="logout" />
               </a>
             )}
+
+
           </Nav>
         </Navbar.Collapse>
       </Container>

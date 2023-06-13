@@ -32,7 +32,7 @@ const CartPreview = () => {
         {items.map((product) => {
           return (
             <li className="cart-item" key={product.name}>
-              <img className="product-image" src={`${imagesUrl}/${product.images[0]}`} />
+              <img className="product-image" src={`${imagesUrl}/${product?.images && product?.images[0]}`} />
               <div className="product-info">
                 <p className="product-name">{product.name}</p>
                 <div> {product.price && <p className="product-price">{authState.hasPermissions([Permissions.RESELLER,Permissions.SHOPKEEPER])?  product.wholeSalePrice:product.price}</p>}</div>

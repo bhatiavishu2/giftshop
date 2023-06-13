@@ -51,7 +51,7 @@ const CartPreview = ({handleClose}) => {
               >
                 <img
                   className="product-image"
-                  src={`${imagesUrl}/${product.images[0]}`}
+                  src={`${imagesUrl}/${product?.images[0]}`}
                 />
                 <div className="product-info">
                   <label className="product-name">{product.name}</label>

@@ -51,6 +51,7 @@ import {
 import { Permissions } from "./constants/common";
 import { onError } from "@apollo/client/link/error";
 import { PDP } from "pages/pdp";
+import OrderPage from "pages/orders";
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   // add the authorization to the headers
@@ -224,6 +225,17 @@ export const navConfig = [
     title: "Permissions",
     path: "/permissions",
     component: PermissionPage,
+    layout: CommonLayout,
+    showNav: false,
+    showInDropdown: true,
+    isPrivate: true,
+    permissions: [Permissions.CREATE_PERMISSION]
+  },
+  {
+    id: "orders",
+    title: "Orders",
+    path: "/orders",
+    component: OrderPage,
     layout: CommonLayout,
     showNav: false,
     showInDropdown: true,

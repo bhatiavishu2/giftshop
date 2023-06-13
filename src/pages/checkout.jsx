@@ -380,7 +380,7 @@ const Checkout = () => {
                 <li className="cart-item" key={product.name}>
                   <img
                     className="product-image"
-                    src={`${imagesUrl}/${product.images[0]}`}
+                    src={`${imagesUrl}/${product?.images[0]}`}
                   />
                   <div className="product-info">
                     <p className="product-name">{product.name}</p>

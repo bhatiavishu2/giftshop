@@ -22,3 +22,18 @@ export const createOrder = gql`
     }
   }
 `;
+
+export const getOrders = gql`
+  query orders {
+    orders {
+      id
+      userId
+      productIds
+      orderStatus
+      orderRemarks
+      shippingDetails
+      initialPayment
+      uploadedPhotos
+    }
+  }
+`;

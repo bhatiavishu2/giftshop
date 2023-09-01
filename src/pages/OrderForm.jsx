@@ -29,9 +29,7 @@ const OrderForm = () => {
     if (fromUrl) {
       history.push(fromUrl);
     } else {
-      history.push(
-        `/my-order?orderId=${userData?.data?.createCustomOrder?.id}`
-      );
+      history.push(`/my-order?id=${userData?.data?.createCustomOrder?.id}`);
     }
   };
 

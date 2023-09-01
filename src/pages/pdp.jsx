@@ -4,11 +4,14 @@ import { Carousel } from "react-responsive-carousel";
 import { AuthStateContext } from "contexts/auth";
 import QuickView from "components/QuickView";
 import { getMedia } from "utils";
+import { CartDispatchContext, addToCart } from "contexts/cart";
 import { imagesUrl } from "../constants";
 import { useContext, useState } from "react";
 import ReactWhatsapp from "react-whatsapp";
 export function PDP({ match }) {
+  const [isAdded, setIsAdded] = useState(false);
   const authState = useContext(AuthStateContext);
+  const dispatch = useContext(CartDispatchContext);
   const [previewData, setPreviewData] = useState(null);
   const [modalActive, setModalActive] = useState(false);
   const { loading: productLoading, data: productData = {} } = useQuery(
@@ -44,6 +47,14 @@ export function PDP({ match }) {
   };
   const closeModal = () => {
     setModalActive(false);
+  };
+  const handleAddToCart = () => {
+    const product = { ...productData?.product, quantity: 1 };
+    addToCart(dispatch, product);
+    setIsAdded(true);
+    setTimeout(() => {
+      setIsAdded(false);
+    }, 3500);
   };
   return (
     <div className="pd-wrap">
@@ -190,26 +201,36 @@ export function PDP({ match }) {
               {isOutOfStock ? (
                 <div className="out-of-stock">Out Of Stock</div>
               ) : (
-                <ReactWhatsapp
-                  className="whatsapp"
-                  number={
-                    authState.hasPermissions([
-                      Permissions.RESELLER,
-                      Permissions.SHOPKEEPER
-                    ])
-                      ? "+91-9582611877"
-                      : "+91-9818855029"
-                  }
-                  message={`${window.location.origin}/products/${subCategoryDetails.category}?productId=${match?.params?.id}`}
-                >
-                  <img src="/whatsapp.png" width="50" alt="whatsapp" />
-                </ReactWhatsapp>
+                // <ReactWhatsapp
+                //   className="whatsapp"
+                //   number={
+                //     authState.hasPermissions([
+                //       Permissions.RESELLER,
+                //       Permissions.SHOPKEEPER
+                //     ])
+                //       ? "+91-9582611877"
+                //       : "+91-9818855029"
+                //   }
+                //   message={`${window.location.origin}/products/${subCategoryDetails.category}?productId=${match?.params?.id}`}
+                // >
+                //   <img src="/whatsapp.png" width="50" alt="whatsapp" />
+                // </ReactWhatsapp>
+
+                <div className="product-action">
+                  <button
+                    className={!isAdded ? "" : "added"}
+                    type="button"
+                    onClick={handleAddToCart}
+                    disabled={isAdded}
+                  >
+                    {!isAdded ? "ADD TO CART" : "✔ ADDED"}
+                  </button>
+                </div>
               )}
             </div>
           </div>
         </div>
         <div className="product-info-tabs">
-    
           <div className="tab-content" id="myTabContent">
             <div
               className="tab-pane fade show active"
@@ -217,9 +238,6 @@ export function PDP({ match }) {
               role="tabpanel"
               aria-labelledby="description-tab"
             >
-              
-      
-
               {previewData && (
                 <QuickView
                   product={previewData}

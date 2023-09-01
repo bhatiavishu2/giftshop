@@ -35,6 +35,7 @@ import UserRolePage from "pages/userRoles";
 import CreateUserRolePage from "pages/createUserRole";
 import CategoriesPage from "pages/categories";
 import SubCategoriesPage from "pages/subCategories";
+import OrderFormPage from "pages/OrderForm";
 import { endpoint } from "./constants";
 import "assets/scss/style.scss";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -52,6 +53,8 @@ import { Permissions } from "./constants/common";
 import { onError } from "@apollo/client/link/error";
 import { PDP } from "pages/pdp";
 import OrderPage from "pages/orders";
+import CustomOrderPage from "pages/customOrders";
+import MyOrder from "pages/myOrder";
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   // add the authorization to the headers
@@ -242,6 +245,18 @@ export const navConfig = [
     isPrivate: true,
     permissions: [Permissions.CREATE_PERMISSION]
   },
+
+  {
+    id: "custom-orders",
+    title: "Custom Orders",
+    path: "/custom-orders",
+    component: CustomOrderPage,
+    layout: CommonLayout,
+    showNav: false,
+    showInDropdown: true,
+    isPrivate: true,
+    permissions: [Permissions.CREATE_PERMISSION]
+  },
   {
     id: "categories",
     title: "Categories",
@@ -373,6 +388,24 @@ export const navConfig = [
     layout: CommonLayout,
     showNav: false,
     isPrivate: true
+  },
+  {
+    id: "orderForm",
+    title: "Order Form",
+    path: "/order-form",
+    component: OrderFormPage,
+    layout: AuthLayout,
+    showNav: false,
+    isPrivate: false
+  },
+  {
+    id: "myOrder",
+    title: "My Order",
+    path: "/my-order",
+    component: MyOrder,
+    layout: AuthLayout,
+    showNav: false,
+    isPrivate: false
   }
 ];
 

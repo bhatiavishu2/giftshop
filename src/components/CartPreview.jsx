@@ -5,11 +5,12 @@ import {
   CartStateContext,
   CartDispatchContext,
   removeFromCart,
-  toggleCartPopup,
+  addToCart,
+  toggleCartPopup
 } from "contexts/cart";
 import { AuthStateContext } from "contexts/auth";
 import { imagesUrl } from "../constants";
-import {Permissions} from '../constants/common'
+import { Permissions } from "../constants/common";
 
 const CartPreview = () => {
   const { items, isCartOpen } = useContext(CartStateContext);
@@ -25,17 +26,32 @@ const CartPreview = () => {
     toggleCartPopup(dispatch);
     history.push("/checkout");
   };
-  
+
   return (
     <div className={classNames("cart-preview", { active: isCartOpen })}>
       <ul className="cart-items">
         {items.map((product) => {
           return (
             <li className="cart-item" key={product.name}>
-              <img className="product-image" src={`${imagesUrl}/${product?.images && product?.images[0]}`} />
+              <img
+                className="product-image"
+                src={`${imagesUrl}/${product?.images && product?.images[0]}`}
+              />
               <div className="product-info">
                 <p className="product-name">{product.name}</p>
-                <div> {product.price && <p className="product-price">{authState.hasPermissions([Permissions.RESELLER,Permissions.SHOPKEEPER])?  product.wholeSalePrice:product.price}</p>}</div>
+                <div>
+                  {" "}
+                  {product.price && (
+                    <p className="product-price">
+                      {authState.hasPermissions([
+                        Permissions.RESELLER,
+                        Permissions.SHOPKEEPER
+                      ])
+                        ? product.wholeSalePrice
+                        : product.price}
+                    </p>
+                  )}
+                </div>
               </div>
               <div className="product-total">
                 <p className="quantity">
@@ -43,8 +59,32 @@ const CartPreview = () => {
                     product.quantity > 1 ? "Nos." : "No."
                   }`}
                 </p>
-                <p className="amount">{product.quantity * (authState.hasPermissions([Permissions.RESELLER,Permissions.SHOPKEEPER])?  product.wholeSalePrice:product.price)}</p>
+                <div>
+                  <button
+                    className="product-remove"
+                    onClick={() => addToCart(dispatch, product)}
+                  >
+                    +
+                  </button>
+                  <button
+                    className="product-remove"
+                    onClick={() => handleRemove(product.id)}
+                  >
+                    -
+                  </button>
+                </div>
+
+                <p className="amount">
+                  {product.quantity *
+                    (authState.hasPermissions([
+                      Permissions.RESELLER,
+                      Permissions.SHOPKEEPER
+                    ])
+                      ? product.wholeSalePrice
+                      : product.price)}
+                </p>
               </div>
+
               <button
                 className="product-remove"
                 onClick={() => handleRemove(product.id)}

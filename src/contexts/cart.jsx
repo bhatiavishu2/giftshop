@@ -39,6 +39,21 @@ const reducer = (state, action) => {
         items: cartItems
       };
     case "REMOVE_FROM_CART":
+      const productItem = state.items.find(
+        (item) => item.id === action.payload.cartItemId
+      );
+      if (productItem.quantity > 1) {
+        const productItemIndex = state.items.findIndex(
+          (item) => item.id === action.payload.cartItemId
+        );
+        const clonedItems = [...state.items];
+        clonedItems[productItemIndex].quantity =
+          Number(productItem.quantity) - 1;
+        return {
+          ...state,
+          items: clonedItems
+        };
+      }
       return {
         ...state,
         items: state.items.filter(
